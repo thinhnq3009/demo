@@ -9,7 +9,7 @@ export type ButtonImageProps = {
 };
 
 
-export default function ButtonImage({ children, className, image, size = 'sm' }: ButtonImageProps) {
+export default function ButtonImageSquare({ children, className, image, size = 'sm' }: ButtonImageProps) {
 
 
   return (<button

@@ -14,6 +14,16 @@
   "settings": {
     "import/resolver": {
       "typescript": true
+    },
+    "node": {
+      "allowModules": [
+        "@react-three/drei",
+        "@react-three/fiber",
+        "three"
+      ]
     }
+  },
+  "rules": {
+    "import/no-extraneous-dependencies": "off"
   }
 }

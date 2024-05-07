@@ -1,13 +1,17 @@
-@mixin border-gradient($size, $url) {
+@mixin border-gradient($size, $url, $slice, $fill) {
   border: $size solid;
-  border-image: url($url) 1 stretch;
-  //border-image-slice: 1;
+  border-image: url($url) $slice $fill;
 }
 
 .border-image-purple {
-  @include border-gradient(2px, "/assets/rect/btn-gold.svg");
+  @include border-gradient(2px, "/assets/rect/btn-gold.svg", 1, stretch);
 }
 
 .border-image-orange {
-  @include border-gradient(2px, '/assets/rect/btn-gold.svg');
+  @include border-gradient(2px, '/assets/rect/btn-gold.svg', 1, stretch);
 }
+
+.border-input-chat {
+  @include border-gradient(2px, '/assets/item/input-chat.svg', 1, stretch);
+}
+
