@@ -1,24 +1,24 @@
 FROM node:lts as dependencies
-WORKDIR /cms
+WORKDIR /dapp
 COPY package.json yarn.lock ./
 RUN yarn install
 
 FROM node:lts as builder
 
-WORKDIR /cms
+WORKDIR /dapp
 COPY . .
-COPY --from=dependencies /cms/node_modules ./node_modules
+COPY --from=dependencies /dapp/node_modules ./node_modules
 RUN yarn build
 
 FROM node:lts as runner
-WORKDIR /cms
+WORKDIR /dapp
 ENV NODE_ENV development
 
-COPY --from=builder /cms/next.config.js ./
-COPY --from=builder /cms/public ./public
-COPY --from=builder /cms/.next ./.next
-COPY --from=builder /cms/node_modules ./node_modules
-COPY --from=builder /cms/package.json ./package.json
+# COPY --from=builder /dapp/next.config.js ./
+COPY --from=builder /dapp/public ./public
+COPY --from=builder /dapp/.next ./.next
+COPY --from=builder /dapp/node_modules ./node_modules
+COPY --from=builder /dapp/package.json ./package.json
 
 EXPOSE 3000
 CMD ["yarn", "start"]
