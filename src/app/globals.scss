@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "/src/styles/common/index";
+
+@font-face {
+  font-family: 'MochiyPopOne';
+  src: local('MochiyPopOne'), url('/src/fonts/MochiyPopOne.ttf') format('ttf');
+}

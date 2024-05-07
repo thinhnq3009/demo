@@ -1,7 +1,6 @@
-export default function Home() {
+export default function RootLayout() {
   return (
-      <main className="flex text-9xl min-h-screen flex-col items-center justify-between p-24">
-        TON
-    </main>
+        <div className="bg-red-200">
+        </div>
   );
 }

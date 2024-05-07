@@ -1,0 +1,13 @@
+@mixin border-gradient($size, $url) {
+  border: $size solid;
+  border-image: url($url) 1 stretch;
+  //border-image-slice: 1;
+}
+
+.border-image-purple {
+  @include border-gradient(2px, "/assets/rect/btn-gold.svg");
+}
+
+.border-image-orange {
+  @include border-gradient(2px, '/assets/rect/btn-gold.svg');
+}
