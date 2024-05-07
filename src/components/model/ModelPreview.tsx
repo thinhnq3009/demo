@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 'use client';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Environment, OrbitControls, useGLTF } from '@react-three/drei';
@@ -20,8 +19,6 @@ const Character = () => {
   return <primitive position={[0, y, 0]} object={character} scale={2.7}/>;
 };
 export default function ModelPreview() {
-  // const character = useFBX('/assets/models/asuna.fbx');
-  // const be = useFBX('/assets/models/demo/be.fbx');
   const [router] = useState(Math.PI / 2.22);
   return <Canvas>
         <ambientLight intensity={2}/>
@@ -29,15 +26,12 @@ export default function ModelPreview() {
         <spotLight position={[0, -10, 0]}/>
         <Suspense fallback={null}>
             <Character/>
-            {/*<primitive position={[0, 0.1, 0]} object={be} scale={0.001}/>*/}
             <Environment preset="sunset"/>
             <OrbitControls
                 scale={[10, 10, 10]}
                 enableZoom={false}
                 enablePan={false}
                 enableRotate={true}
-                // minPolarAngle={Math.PI / 2.5}
-                // minPolarAngle={Math.PI / 2.5}
                 minPolarAngle={router}
                 maxPolarAngle={router}
                 onUpdate={self => console.log(self)}/>

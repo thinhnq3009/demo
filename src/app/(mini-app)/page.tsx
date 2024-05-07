@@ -5,6 +5,7 @@ import InputChat from '@/components/input/InputChat';
 import ButtonImageArrow from '@/components/button/ButtonImageArrow';
 import CaseInfo from '@/components/common/CaseInfo';
 import HomeMenu from '@/components/common/menu/HomeMenu';
+import ChatPopup from '@/components/common/ChatPopup';
 
 const avt = '/assets/avatar/avt-2.jpg';
 
@@ -18,7 +19,8 @@ export default function HomePage() {
                 <ButtonImageSquare image="\assets\item\battle.svg" className="bg-[#971C01]">Battle</ButtonImageSquare>
             </div>
         </header>
-        <main className="h-[470px]">
+        <main className="h-[470px] relative">
+            <ChatPopup/>
             <ModelPreview/>
         </main>
         <section>
