@@ -2,7 +2,7 @@
 'use client';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Environment, OrbitControls, useGLTF } from '@react-three/drei';
-import { Suspense } from 'react';
+import { Suspense, useState } from 'react';
 import { AnimationMixer } from 'three';
 
 const Character = () => {
@@ -12,16 +12,17 @@ const Character = () => {
   const mixer = new AnimationMixer(character);
   const action = mixer.clipAction(animations[0]);
   action.play();
-
+  const [y] = useState(-3);
   useFrame((state, delta) => {
     mixer.update(delta);
   });
 
-  return <primitive position={[0, -1.7, 0]} object={character} scale={2.7}/>;
+  return <primitive position={[0, y, 0]} object={character} scale={2.7}/>;
 };
 export default function ModelPreview() {
   // const character = useFBX('/assets/models/asuna.fbx');
   // const be = useFBX('/assets/models/demo/be.fbx');
+  const [router] = useState(Math.PI / 2.22);
   return <Canvas>
         <ambientLight intensity={2}/>
         <pointLight position={[10, 10, 10]}/>
@@ -32,11 +33,13 @@ export default function ModelPreview() {
             <Environment preset="sunset"/>
             <OrbitControls
                 scale={[10, 10, 10]}
-                enableZoom={true}
+                enableZoom={false}
                 enablePan={false}
                 enableRotate={true}
-                minPolarAngle={Math.PI / 2.5}
-                maxPolarAngle={Math.PI / 2.5}
+                // minPolarAngle={Math.PI / 2.5}
+                // minPolarAngle={Math.PI / 2.5}
+                minPolarAngle={router}
+                maxPolarAngle={router}
                 onUpdate={self => console.log(self)}/>
         </Suspense>
     </Canvas>;
