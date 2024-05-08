@@ -11,12 +11,13 @@ const Character = () => {
   const mixer = new AnimationMixer(character);
   const action = mixer.clipAction(animations[0]);
   action.play();
-  const [y] = useState(-3);
+  const [y] = useState(-2.6);
+  const [s] = useState(3.2);
   useFrame((state, delta) => {
     mixer.update(delta);
   });
 
-  return <primitive position={[0, y, 0]} object={character} scale={2.7}/>;
+  return <primitive position={[0, y, 0]} object={character} scale={s}/>;
 };
 export default function ModelPreview() {
   const [router] = useState(Math.PI / 2.22);

@@ -19,14 +19,14 @@ export default function HomePage() {
                 <ButtonImageSquare image="\assets\item\battle.svg" className="bg-[#971C01]">Battle</ButtonImageSquare>
             </div>
         </header>
-        <main className="h-[470px] relative">
+        <main className="flex-1 relative">
             <ChatPopup/>
             <ModelPreview/>
         </main>
-        <section>
-            <InputChat className="mb-2" placeholder={'Start typing ...'}/>
+        <section className="text-center">
+            <InputChat className="mb-2 mx-auto" placeholder={'Start typing ...'}/>
             <ButtonImageArrow className="mb-3" size={'lg'}>Play</ButtonImageArrow>
-            <div className="flex gap-1.5 mb-6">
+            <div className="flex gap-1.5 mb-6 justify-center">
                 <ButtonImageArrow>For $NUD</ButtonImageArrow>
                 <ButtonImageArrow>For $TON</ButtonImageArrow>
                 <ButtonImageArrow>Free game</ButtonImageArrow>

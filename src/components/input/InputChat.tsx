@@ -12,6 +12,7 @@ export default function InputChat({ className, classNameInput, ...passProp }: In
         <input
             className={classNames('font-mochi text-white flex-1 items-center outline-none bg-transparent text-2xs py-1 pl-0.5', classNameInput)}
             {...passProp}/>
-        <button className="bg-[url('/assets/item/arrow.svg')] pr-5 bg-center bg-no-repeat"></button>
+        <button
+            className="bg-[url('/assets/item/arrow.svg')] active:translate-x-0.5 duration-100 ease-in-out pr-5 bg-center bg-no-repeat"></button>
     </div>;
 }
