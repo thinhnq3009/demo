@@ -20,7 +20,7 @@ const Character = () => {
   return <primitive position={[0, y, 0]} object={character} scale={s}/>;
 };
 export default function ModelPreview() {
-  const [router] = useState(Math.PI / 2.22);
+  // const [router] = useState(Math.PI / 2.22);
   return <Canvas>
         <ambientLight intensity={2}/>
         <pointLight position={[10, 10, 10]}/>
@@ -30,11 +30,11 @@ export default function ModelPreview() {
             <Environment preset="sunset"/>
             <OrbitControls
                 scale={[10, 10, 10]}
-                enableZoom={false}
-                enablePan={false}
+                enableZoom={true}
+                enablePan={true}
                 enableRotate={true}
-                minPolarAngle={router}
-                maxPolarAngle={router}
+                // minPolarAngle={router}
+                // maxPolarAngle={router}
                 onUpdate={self => console.log(self)}/>
         </Suspense>
     </Canvas>;
