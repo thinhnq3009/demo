@@ -7,6 +7,7 @@ import CaseInfo from '@/components/common/CaseInfo';
 import HomeMenu from '@/components/common/menu/HomeMenu';
 import ChatPopup from '@/components/common/ChatPopup';
 import HomeContextProvider from "@/components/context/home/HomeContextProvider";
+import Carousel from '@/components/common/Carousel';
 
 const avt = '/assets/avatar/avt-2.jpg';
 
@@ -25,7 +26,12 @@ export default function HomePage() {
             </header>
             <main className="flex-1 relative">
                 <ChatPopup/>
-                <ModelPreview/>
+                {/* <ModelPreview/> */}
+                <Carousel>
+                    <ModelPreview/>
+                    <ModelPreview/>
+                    <ModelPreview/>
+                </Carousel>
             </main>
             <section className="text-center">
                 <InputChat className="mb-2 mx-auto" placeholder={'Start typing ...'}/>
