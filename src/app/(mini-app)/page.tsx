@@ -35,14 +35,14 @@ export default function HomePage() {
             </main>
             <section className="text-center">
                 <InputChat className="mb-2 mx-auto" placeholder={'Start typing ...'}/>
-                <ButtonImageArrow className="mb-3 opacity-0" size={'lg'}>Play</ButtonImageArrow>
-                <div className="flex gap-1.5 mb-6 justify-center opacity-0">
-                    <ButtonImageArrow>For $NUD</ButtonImageArrow>
-                    <ButtonImageArrow>For $TON</ButtonImageArrow>
-                    <ButtonImageArrow>Free game</ButtonImageArrow>
-                </div>
-                <CaseInfo/>
-                <HomeMenu/>
+                {/*<ButtonImageArrow className="mb-3 opacity-0" size={'lg'}>Play</ButtonImageArrow>*/}
+                {/*<div className="flex gap-1.5 mb-6 justify-center opacity-0">*/}
+                {/*    <ButtonImageArrow>For $NUD</ButtonImageArrow>*/}
+                {/*    <ButtonImageArrow>For $TON</ButtonImageArrow>*/}
+                {/*    <ButtonImageArrow>Free game</ButtonImageArrow>*/}
+                {/*</div>*/}
+                {/*<CaseInfo/>*/}
+                {/*<HomeMenu/>*/}
             </section>
         </div>
     </HomeContextProvider>;

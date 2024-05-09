@@ -9,7 +9,7 @@ const Character = () => {
   console.log(animations);
   console.log(character);
   const mixer = new AnimationMixer(character);
-  const action = mixer.clipAction(animations[2]);
+  const action = mixer.clipAction(animations[0]);
   action.play();
   const [y] = useState(-2.6);
   const [s] = useState(3.2);
