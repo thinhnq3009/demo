@@ -1,37 +1,42 @@
 'use client';
 
-import { ReactNode, useEffect, useMemo, useRef, useState } from 'react';
+import React, {ReactNode, useEffect, useMemo, useRef, useState} from 'react';
 import classNames from 'classnames';
-import React from 'react';
+import ButtonImageSlide from "@/components/button/ButtonImageSilde";
 // import ButtonImageSlide from '@/components/button/BottonImageSlide';
 
 type CaurouselProps = {
   children: ReactNode[];
   className?: string;
+  onChange?: (index: number, target: HTMLDivElement) => void;
+  nextImage: string;
+  prevImage: string;
 };
 
-export default function Carousel({ children, className }: CaurouselProps) {
+
+export default function Carousel({children, className, nextImage, prevImage, onChange}: CaurouselProps) {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
 
   const containerRef = useRef<HTMLDivElement>({} as HTMLDivElement);
-  const childRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const childRefs = useRef<HTMLDivElement[]>([]);
 
-  const nextImage = () => {
+  const handleNext = () => {
     setCurrentSlideIndex((prevIndex) => (prevIndex + 1) % children.length);
   };
-  const prevImage = () => {
+  const handlePrev = () => {
     setCurrentSlideIndex((prevIndex) => (prevIndex === 0 ? children.length - 1 : prevIndex - 1));
   };
-  
+
   useEffect(() => {
     const containerWidth = containerRef?.current?.clientWidth || 0;
     const currentTranslateValue = currentSlideIndex * containerWidth;
-    childRefs.current.forEach((ref) => { 
+    childRefs.current.forEach((ref) => {
       if (ref) {
         ref.style.transition = 'transform 0.5s ease-in-out';
         ref.style.transform = `translateX(-${currentTranslateValue}px)`;
       }
     });
+    onChange?.(currentSlideIndex, childRefs.current[currentSlideIndex]);
   }, [currentSlideIndex]);
 
 
@@ -42,23 +47,25 @@ export default function Carousel({ children, className }: CaurouselProps) {
   console.log('currentTranslateValue', currentTranslateValue);
   console.log('containerWidth', containerWidth);
   return (
-    <div ref={containerRef} className={classNames('relative ####', className)} style={{ overflow: 'hidden' }}>
-      <div className='flex h-32 flex-nowrap'>
-            <button className="absolute top-1/2 left-0 -translate-y-1/2 z-10" onClick={prevImage}>{'<'}</button>
-                {children.map((child, index) => <div
-                    key={index}
-                    ref={el => childRefs.current[index] = el}
-                    className="min-w-full inline-block"
-                    style={{
-                      // transform: `translateX(${index * containerWidth}px)`,
-                      // transition: 'transform 0.5s ease-in-out',
-                    }}
-                >
-                    {child}
-                </div>)}
-            <button className="absolute top-1/2 right-0 -translate-y-1/2 z-10" onClick={nextImage}>{'>'}</button>
-            {/* <ButtonImageSlide url_child="/assets/item/arrow-slide-right.svg" image="\assets\avatar\avt-2.svg" className="absolute top-1/2 right-0 -translate-y-1/2 z-10" onClick={nextImage}> </ButtonImageSlide> */}
-            </div>
-    </div>
-  );
+    <div ref={containerRef} className={classNames('relative h-full overflow-hidden', className)}>
+      <div className='flex flex-nowrap h-full'>
+        <ButtonImageSlide imageUrl={prevImage} direction="left"
+                          onClick={handlePrev}>{'<'}</ButtonImageSlide>
+        {children.map((child, index) => <div
+          key={index}
+          ref={el => {
+            childRefs.current[index] = el === null ? {} as HTMLDivElement : el
+          }}
+          className="min-w-full inline-block"
+          style={{
+            // transform: `translateX(${index * containerWidth}px)`,
+            // transition: 'transform 0.5s ease-in-out',
+          }}
+        >
+          {child}
+        </div>)}
+        <ButtonImageSlide imageUrl={nextImage} direction="right"
+                          onClick={handleNext}>{'>'}</ButtonImageSlide>
+      </div>
+    </div>)
 }
