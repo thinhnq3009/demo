@@ -8,11 +8,17 @@ import HomeMenu from '@/components/common/menu/HomeMenu';
 import ChatPopup from '@/components/common/ChatPopup';
 import HomeContextProvider from "@/components/context/home/HomeContextProvider";
 import Carousel from '@/components/common/Carousel';
+import {CharacterName} from "@/models/Character";
 
 const avt = '/assets/avatar/avt-2.jpg';
 
 
 export default function HomePage() {
+
+  const handleChangeCharacter = (character: CharacterName) => {
+
+  }
+
   return <HomeContextProvider>
     <div className="px-1 flex flex-col h-full">
       <header className="font-mochi flex justify-between">
