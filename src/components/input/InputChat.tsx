@@ -16,7 +16,7 @@ export default function InputChat({ className, classNameInput, ...passProp }: In
     messageResponse: [messageResponse, setMessageResponse],
     sending: [sending, setSending],
   } = useContext(HomeContext);
-  const [message, setMessage] = useState('Xin chào');
+  const [message, setMessage] = useState('');
 
   // API
   const { getResponse } = apiChat();
