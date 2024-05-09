@@ -1,24 +1,29 @@
-import {createContext, Dispatch, ReactNode, SetStateAction, useMemo, useState} from "react";
-import {SetState} from "zustand";
+'use client';
+
+import { createContext, Dispatch, ReactNode, SetStateAction, useState } from 'react';
 
 type HomeContextType = {
-    messageResponse: [string, Dispatch<SetStateAction<string>>]
-}
+  messageResponse: [string, Dispatch<SetStateAction<string>>]
+  sending: [boolean, Dispatch<SetStateAction<boolean>>]
+};
 
 export const HomeContext = createContext<HomeContextType>({
-    messageResponse: ["", () => {
-    }]
+  messageResponse: ['', () => {
+  }],
+  sending: [false, () => {
+  }],
 });
 
-export default function HomeContextProvider({children}: {
-    children: ReactNode
+export default function HomeContextProvider({ children }: {
+  children: ReactNode
 }) {
-    // Show status for xs screen
-    const [isShowSidebarMd, setIsShowSidebarMd] = useState<string>("")
+  // Show status for xs screen
+  const [isShowSidebarMd, setIsShowSidebarMd] = useState<string>('');
+  const [sending, setSending] = useState<boolean>(false);
+  const value: HomeContextType = {
+    messageResponse: [isShowSidebarMd, setIsShowSidebarMd],
+    sending: [sending, setSending],
+  };
 
-    const value: HomeContextType = useMemo(() => ({
-        messageResponse: [isShowSidebarMd, setIsShowSidebarMd],
-    }), [])
-
-    return <HomeContext.Provider value={value}>{children}</HomeContext.Provider>
+  return <HomeContext.Provider value={value}>{children}</HomeContext.Provider>;
 }

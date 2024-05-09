@@ -28,6 +28,30 @@ const config: Config = {
         '3xs': '0.5rem',
         '4xs': '0.375rem',
       },
+      keyframes: {
+        'flip-x': {
+          from: {
+            transform: 'perspective(400px) rotate3d(1, 0, 0, 90deg)',
+            'animation-timing-function': 'ease-in',
+          },
+          '40%': {
+            transform: 'perspective(400px) rotate3d(1, 0, 0, -20deg)',
+            'animation-timing-function': 'ease-in',
+          },
+          '60%': {
+            transform: 'perspective(400px) rotate3d(1, 0, 0, 10deg)',
+          },
+          '80%': {
+            transform: 'perspective(400px) rotate3d(1, 0, 0, -5deg)',
+          },
+          to: {
+            transform: 'perspective(400px)',
+          },
+        },
+      },
+      animation: {
+        'flip-x': 'flip-x 1s infinite',
+      },
     },
   },
   plugins: [],

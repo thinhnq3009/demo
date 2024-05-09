@@ -1,93 +1,93 @@
-import axios from 'axios'
+import axios from 'axios';
 
-const baseURL = process.env.NEXT_PUBLIC_BACKEND_URL
+const baseURL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
 const axiosClient = axios.create({
-    baseURL,
-    headers: {
-        'Content-Type': 'application/json',
-    },
-})
+  baseURL,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
 
-let isRefreshing = false
-let failedQueue = []
+let isRefreshing = false;
+let failedQueue = [];
 
 const processQueue = (error, token = null) => {
-    failedQueue.forEach((prom) => {
-        if (error) {
-            prom.reject(error)
-        } else {
-            prom.resolve(token)
-        }
-    })
+  failedQueue.forEach((prom) => {
+    if (error) {
+      prom.reject(error);
+    } else {
+      prom.resolve(token);
+    }
+  });
 
-    failedQueue = []
-}
+  failedQueue = [];
+};
 
 const refreshAccessToken = async () => {
-    const refreshToken = localStorage.getItem('refreshToken') || ''
+  const refreshToken = localStorage.getItem('refreshToken') || '';
 
-    const {data: {data: accessToken}} = await axios.post(`${baseURL}/auth/refresh`, {
-        refreshToken,
-    })
+  const { data: { data: accessToken } } = await axios.post(`${baseURL}/auth/refresh`, {
+    refreshToken,
+  });
 
-    return accessToken
-}
+  return accessToken;
+};
 axiosClient.interceptors.request.use(async (config) => {
-    const token = localStorage.getItem('accessToken')
+  const token = localStorage.getItem('accessToken');
 
-    if (token) {
-        config.headers.Authorization = `Bearer ${token}`
-    }
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
 
-    return config
-})
+  return config;
+});
 
 function isExpiredError(error) {
-    return error?.response?.data?.statusCode === 401 && error?.response?.data?.message === 'Token expired'
-    // return false
+  return error?.response?.data?.statusCode === 401 && error?.response?.data?.message === 'Token expired';
+  // return false
 }
 
 axiosClient.interceptors.response.use(
-    (response) => response.data,
-    async (error) => {
-        const originalRequest = error.config
+  (response) => response.data,
+  async (error) => {
+    const originalRequest = error.config;
 
-        // Kiểm tra nếu phản hồi là lỗi 401 (Unauthorized)
-        if (isExpiredError(error) && !originalRequest._retry) {
-            originalRequest._retry = true
+    // Kiểm tra nếu phản hồi là lỗi 401 (Unauthorized)
+    if (isExpiredError(error) && !originalRequest._retry) {
+      originalRequest._retry = true;
 
-            if (!isRefreshing) {
-                isRefreshing = true
+      if (!isRefreshing) {
+        isRefreshing = true;
 
-                // Thực hiện logic refresh token ở đây
-                try {
-                    const newToken = await refreshAccessToken()
-                    localStorage.setItem('accessToken', newToken)
+        // Thực hiện logic refresh token ở đây
+        try {
+          const newToken = await refreshAccessToken();
+          localStorage.setItem('accessToken', newToken);
 
-                    // Cập nhật lại header với token mới
-                    originalRequest.headers.Authorization = `Bearer ${newToken}`
+          // Cập nhật lại header với token mới
+          originalRequest.headers.Authorization = `Bearer ${newToken}`;
 
-                    // Thực hiện lại yêu cầu gốc với token mới
-                    return await axiosClient(originalRequest)
-                } catch (refreshError) {
-                    // Xử lý lỗi khi refresh token
-                    processQueue(refreshError, null)
-                    return await Promise.reject(refreshError)
-                } finally {
-                    isRefreshing = false
-                }
-            }
-
-            // Trả về một Promise mới chờ đợi token mới
-            return new Promise((resolve, reject) => {
-                failedQueue.push({resolve, reject})
-            })
+          // Thực hiện lại yêu cầu gốc với token mới
+          return await axiosClient(originalRequest);
+        } catch (refreshError) {
+          // Xử lý lỗi khi refresh token
+          processQueue(refreshError, null);
+          return await Promise.reject(refreshError);
+        } finally {
+          isRefreshing = false;
         }
+      }
 
-        // Nếu không phải là lỗi 401 hoặc không có token hết hạn, trả về lỗi nguyên thủy
-        return Promise.reject(error?.response?.data)
-    },
-)
+      // Trả về một Promise mới chờ đợi token mới
+      return new Promise((resolve, reject) => {
+        failedQueue.push({ resolve, reject });
+      });
+    }
 
-export default axiosClient
+    // Nếu không phải là lỗi 401 hoặc không có token hết hạn, trả về lỗi nguyên thủy
+    return Promise.reject(error?.response?.data);
+  },
+);
+
+export default axiosClient;
