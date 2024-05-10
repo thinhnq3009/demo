@@ -11,11 +11,12 @@ type CaurouselProps = {
   onChange?: (index: number, target: HTMLDivElement) => void;
   nextImage: string;
   prevImage: string;
+  defaultIndex?: number;
 };
 
 
-export default function Carousel({ children, className, nextImage, prevImage, onChange }: CaurouselProps) {
-  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
+export default function Carousel({ children, className, nextImage, prevImage, onChange, defaultIndex = 0 }: CaurouselProps) {
+  const [currentSlideIndex, setCurrentSlideIndex] = useState(defaultIndex);
 
   const containerRef = useRef<HTMLDivElement>({} as HTMLDivElement);
   const childRefs = useRef<HTMLDivElement[]>([]);

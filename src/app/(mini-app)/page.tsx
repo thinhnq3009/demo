@@ -31,7 +31,7 @@ export default function HomePage() {
       <main className="flex-1 relative">
         <ChatPopup/>
         {/*<ModelPreview/> */}
-        <Carousel nextImage="/assets/avatar/model-1.svg" prevImage="/assets/avatar/model-2.svg">
+        <Carousel defaultIndex={1} nextImage="/assets/avatar/model-1.svg" prevImage="/assets/avatar/model-2.svg">
           <ModelPreview modelUrl="/assets/models/Soldier.glb"/>
           <ModelPreview modelUrl="/assets/models/emily.glb"/>
           <ModelPreview modelUrl="/assets/models/emily-2.glb"/>
