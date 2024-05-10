@@ -1,16 +1,21 @@
 import Profile from '@/components/common/header/Profile';
 import ButtonImageSquare from '@/components/button/ButtonImageSquare';
-import ModelPreview from '@/components/model/ModelPreview';
+// import ModelPreview from '@/components/model/ModelPreview';
 import InputChat from '@/components/input/InputChat';
-import ButtonImageArrow from '@/components/button/ButtonImageArrow';
-import CaseInfo from '@/components/common/CaseInfo';
-import HomeMenu from '@/components/common/menu/HomeMenu';
+// import ButtonImageArrow from '@/components/button/ButtonImageArrow';
+// import CaseInfo from '@/components/common/CaseInfo';
+// import HomeMenu from '@/components/common/menu/HomeMenu';
 import ChatPopup from '@/components/common/ChatPopup';
-import HomeContextProvider from "@/components/context/home/HomeContextProvider";
+import HomeContextProvider from '@/components/context/home/HomeContextProvider';
 import Carousel from '@/components/common/Carousel';
+import Loading from '@/components/loading/loadingModel';
+import dynamic from 'next/dynamic';
 
 const avt = '/assets/avatar/avt-2.jpg';
-
+const LoadModelPreview = dynamic(() => import('@/components/model/ModelPreview'), {
+  ssr: false,
+  loading: () => <Loading />,
+});
 
 export default function HomePage() {
   return <HomeContextProvider>
@@ -28,9 +33,9 @@ export default function HomePage() {
         <ChatPopup/>
         {/*<ModelPreview/> */}
         <Carousel nextImage="/assets/avatar/model-1.svg" prevImage="/assets/avatar/model-2.svg">
-          <ModelPreview modelUrl="/assets/models/Soldier.glb"/>
-          <ModelPreview modelUrl="/assets/models/emily.glb"/>
-          <ModelPreview modelUrl="/assets/models/emily-2.glb"/>
+          <LoadModelPreview modelUrl="/assets/models/Soldier.glb"/>
+          <LoadModelPreview modelUrl="/assets/models/emily.glb"/>
+          <LoadModelPreview modelUrl="/assets/models/emily-2.glb"/>
         </Carousel>
       </main>
       <section className="text-center">
