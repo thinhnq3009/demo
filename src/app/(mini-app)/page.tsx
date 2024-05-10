@@ -1,24 +1,22 @@
+'use client';
 import Profile from '@/components/common/header/Profile';
 import ButtonImageSquare from '@/components/button/ButtonImageSquare';
 import ModelPreview from '@/components/model/ModelPreview';
 import InputChat from '@/components/input/InputChat';
-import ButtonImageArrow from '@/components/button/ButtonImageArrow';
-import CaseInfo from '@/components/common/CaseInfo';
-import HomeMenu from '@/components/common/menu/HomeMenu';
 import ChatPopup from '@/components/common/ChatPopup';
-import HomeContextProvider from "@/components/context/home/HomeContextProvider";
+import HomeContextProvider from '@/components/context/home/HomeContextProvider';
 import Carousel from '@/components/common/Carousel';
-import {CharacterName} from "@/models/Character";
+import { FocusEventHandler } from 'react';
 
 const avt = '/assets/avatar/avt-2.jpg';
 
 
 export default function HomePage() {
 
-  const handleChangeCharacter = (character: CharacterName) => {
 
-  }
-
+  const handleScrollToFocus: FocusEventHandler = (e) => {
+    e.currentTarget.scrollIntoView({ behavior: 'smooth' });
+  };
   return <HomeContextProvider>
     <div className="px-1 flex flex-col h-full">
       <header className="font-mochi flex justify-between">
@@ -40,7 +38,7 @@ export default function HomePage() {
         </Carousel>
       </main>
       <section className="text-center">
-        <InputChat className="mb-2 mx-auto" placeholder={'Start typing ...'}/>
+        <InputChat onFocus={handleScrollToFocus} className="mb-2 mx-auto" placeholder={'Start typing ...'}/>
         {/*<ButtonImageArrow className="mb-3 opacity-0" size={'lg'}>Play</ButtonImageArrow>*/}
         {/*<div className="flex gap-1.5 mb-6 justify-center opacity-0">*/}
         {/*    <ButtonImageArrow>For $NUD</ButtonImageArrow>*/}

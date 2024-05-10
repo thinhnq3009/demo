@@ -1,6 +1,6 @@
 'use client';
 
-import {InputHTMLAttributes, KeyboardEventHandler, useContext, useRef, useState} from 'react';
+import { InputHTMLAttributes, KeyboardEventHandler, useContext, useState } from 'react';
 import classNames from 'classnames';
 import { HomeContext } from '@/components/context/home/HomeContextProvider';
 import apiChat from '@/apis/chatApi';

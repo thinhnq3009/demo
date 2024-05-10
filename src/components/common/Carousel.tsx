@@ -1,8 +1,8 @@
 'use client';
 
-import React, {ReactNode, useEffect, useMemo, useRef, useState} from 'react';
+import React, { ReactNode, useEffect, useMemo, useRef, useState } from 'react';
 import classNames from 'classnames';
-import ButtonImageSlide from "@/components/button/ButtonImageSilde";
+import ButtonImageSlide from '@/components/button/ButtonImageSilde';
 // import ButtonImageSlide from '@/components/button/BottonImageSlide';
 
 type CaurouselProps = {
@@ -14,7 +14,7 @@ type CaurouselProps = {
 };
 
 
-export default function Carousel({children, className, nextImage, prevImage, onChange}: CaurouselProps) {
+export default function Carousel({ children, className, nextImage, prevImage, onChange }: CaurouselProps) {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
 
   const containerRef = useRef<HTMLDivElement>({} as HTMLDivElement);
@@ -54,7 +54,7 @@ export default function Carousel({children, className, nextImage, prevImage, onC
         {children.map((child, index) => <div
           key={index}
           ref={el => {
-            childRefs.current[index] = el === null ? {} as HTMLDivElement : el
+            childRefs.current[index] = el === null ? {} as HTMLDivElement : el;
           }}
           className="min-w-full inline-block"
           style={{
@@ -67,5 +67,5 @@ export default function Carousel({children, className, nextImage, prevImage, onC
         <ButtonImageSlide imageUrl={nextImage} direction="right"
                           onClick={handleNext}>{'>'}</ButtonImageSlide>
       </div>
-    </div>)
+    </div>);
 }

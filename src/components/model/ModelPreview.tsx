@@ -24,25 +24,25 @@ const Character = ({ modelUrl }: CharacterProps) => {
   return <primitive position={[0, y, 0]} object={character} scale={s}/>;
 };
 export default function ModelPreview({ modelUrl }: CharacterProps) {
-  // const [router] = useState(Math.PI / 2.22);
-  return <>ModelPreview</>;
-  // return <Canvas>
-  //       <ambientLight intensity={2}/>
-  //       <pointLight position={[10, 10, 10]}/>
-  //       <spotLight position={[0, -10, 0]}/>
-  //       <Suspense fallback={null}>
-  //           <Character modelUrl={modelUrl}/>
-  //           <Environment preset="sunset"/>
-  //           <OrbitControls
-  //               scale={[10, 10, 10]}
-  //               enableZoom={true}
-  //               enablePan={true}
-  //               enableRotate={true}
-  //               // minPolarAngle={router}
-  //               // maxPolarAngle={router}
-  //               onUpdate={self => console.log(self)}/>
-  //       </Suspense>
-  //   </Canvas>;
+  const [router] = useState(Math.PI / 2.22);
+  // return <>ModelPreview</>;
+  return <Canvas>
+        <ambientLight intensity={2}/>
+        <pointLight position={[10, 10, 10]}/>
+        <spotLight position={[0, -10, 0]}/>
+        <Suspense fallback={null}>
+            <Character modelUrl={modelUrl}/>
+            <Environment preset="sunset"/>
+            <OrbitControls
+                scale={[10, 10, 10]}
+                enableZoom={true}
+                enablePan={true}
+                enableRotate={true}
+                minPolarAngle={router}
+                maxPolarAngle={router}
+                onUpdate={self => console.log(self)}/>
+        </Suspense>
+    </Canvas>;
 
 }
 
