@@ -1,9 +1,24 @@
-import React from 'react';
+'use client';
+import React, { useEffect, useState } from 'react';
+import { min } from 'three/examples/jsm/nodes/math/MathNode';
 
 export default function BaseLayout({ children }: { children: React.ReactNode }) {
-  return <div className="bg-city bg-cover bg-center bg-no-repeat h-screen w-100 pt-4">
-        <div className="w-base mx-auto h-full">
-            {children}
-        </div>
-    </div>;
+
+  const [screenHeight, setScreenHeight] = useState(window.innerHeight || undefined);
+
+  const updateScreenHeight = () => {
+    setScreenHeight(window.visualViewport?.height);
+  };
+
+  useEffect(() => {
+    window.addEventListener('resize', updateScreenHeight);
+    return () => {
+      window.removeEventListener('resize', updateScreenHeight);
+    };
+  }, []);
+  return <div className="bg-city bg-cover bg-center bg-no-repeat h-screen w-100 ">
+    <div className="w-base mx-auto pt-4" style={{ height: `min(100vh,${screenHeight}px` }}>
+      {children}
+    </div>
+  </div>;
 }
