@@ -1,0 +1,101 @@
+.wording {
+    display: flex;
+    align-items: center;
+  }
+  .wrapper {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .circle {
+    background-color: #FFD488;
+      border-radius: 50%;
+      margin: 2px 2px -6px;
+      height: 5px;
+      width: 5px;
+  }
+  .letter {
+    font-family: "Mochiy Pop One", sans-serif;
+    font-size: 12px;
+    animation: jump 1s ease-in-out infinite;
+    letter-spacing: 3.8px;
+    color: #FFD488;
+    font-weight: bold;
+  }
+  .letter:nth-of-type(2) { animation-delay: 0.1s; }
+  .letter:nth-of-type(3) { animation-delay: 0.2s; }
+  .letter:nth-of-type(4) { animation-delay: 0.3s; }
+  .letter:nth-of-type(5) { animation-delay: 0.4s; }
+  .letter:nth-of-type(6) { animation-delay: 0.5s; }
+  .letter:nth-of-type(7) { animation-delay: 0.6s; }
+  .letter:nth-of-type(8) { animation-delay: 0.7s; }
+  .letter:nth-of-type(9) { animation-delay: 0.8s; }
+  
+  @keyframes sip {
+   0%   { background-size: 100% 100%; }
+   100% { background-size: 100% 5%; }
+  }
+  
+  @keyframes jump {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+  }
+  
+  .kinetic {
+    height: 100px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .kinetic::after,
+  .kinetic::before {
+    content: "";
+    animation: rotateA 3s linear infinite;
+    position: absolute;
+    // background-image: url(https://res.cloudinary.com/dryhdml2s/image/upload/v1715325059/samples/gocdwtoabtwp423hr0kp.png);
+    background-image: url('/assets/item/loading-r.svg');
+    height: 100px;
+    width: 58px;
+    background-repeat: no-repeat;
+  }
+  
+  .kinetic::before {
+    animation: rotateB 3s linear infinite;
+    // background-image: url(https://res.cloudinary.com/dryhdml2s/image/upload/v1715326717/i55ghvk3vrlbjcmzdldd.png);
+    background-image: url('/assets/item/loading-l.svg');
+    height: 100px;
+    width: 58px;
+    background-repeat: no-repeat;
+  }
+  .kinetic::after {
+  }
+  
+  @keyframes rotateA {
+    0% {
+      transform: rotate(0deg);
+    }
+    /* Animate from 0 to 120 degrees, then back to 0 */
+    50% {
+      transform: rotate(120deg);
+    }
+    100% {
+      transform: rotate(0deg);
+    }
+  }
+  @keyframes rotateB {
+    0% {
+      transform: rotate(0deg);
+    }
+    /* Animate from 0 to 120 degrees, then back to 0 */
+    50% {
+      transform: rotate(-120deg);
+    }
+    80% {
+    }
+    100% {
+      transform: rotate(0deg);
+    }
+  }

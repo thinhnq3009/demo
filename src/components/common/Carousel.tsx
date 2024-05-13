@@ -12,10 +12,11 @@ type CaurouselProps = {
   nextImage: string;
   prevImage: string;
   defaultIndex?: number;
+  onSlideChange?: (index: number) => void;
 };
 
 
-export default function Carousel({ children, className, nextImage, prevImage, onChange, defaultIndex = 0 }: CaurouselProps) {
+export default function Carousel({ children, className, nextImage, prevImage, onChange, defaultIndex = 0, onSlideChange }: CaurouselProps) {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(defaultIndex);
 
   const containerRef = useRef<HTMLDivElement>({} as HTMLDivElement);
@@ -27,19 +28,36 @@ export default function Carousel({ children, className, nextImage, prevImage, on
   const handlePrev = () => {
     setCurrentSlideIndex((prevIndex) => (prevIndex === 0 ? children.length - 1 : prevIndex - 1));
   };
+  
 
   useEffect(() => {
+    console.log(currentSlideIndex);
     const containerWidth = containerRef?.current?.clientWidth || 0;
     const currentTranslateValue = currentSlideIndex * containerWidth;
     childRefs.current.forEach((ref) => {
       if (ref) {
         ref.style.transition = 'transform 0.5s ease-in-out';
         ref.style.transform = `translateX(-${currentTranslateValue}px)`;
+        ref.style.animation = 'moveSlideshow 3s linear infinite';
       }
     });
     onChange?.(currentSlideIndex, childRefs.current[currentSlideIndex]);
+    onSlideChange?.(currentSlideIndex);
   }, [currentSlideIndex]);
 
+
+  // const carousel = document.querySelector('.carousel');
+  // let carouselChildren: Element[] = [];
+  // if (carousel) {
+  //   carouselChildren = Array.from(carousel.children);
+  // }
+  
+  // carouselChildren.slice(-1).reverse().forEach(card => {
+  //   carousel?.insertAdjacentElement('afterbegin', card.cloneNode(true) as Element);
+  // });
+  // carouselChildren.slice(0, 1).reverse().forEach(card => {
+  //   carousel?.insertAdjacentElement('beforeend', card.cloneNode(true) as Element);
+  // });
 
   const containerWidth = useMemo<number>(() => containerRef?.current?.clientWidth || 0, [containerRef]);
   const currentTranslateValue = useMemo<number>(() => {
@@ -48,7 +66,7 @@ export default function Carousel({ children, className, nextImage, prevImage, on
   console.log('currentTranslateValue', currentTranslateValue);
   console.log('containerWidth', containerWidth);
   return (
-    <div ref={containerRef} className={classNames('relative h-full overflow-hidden', className)}>
+    <div ref={containerRef} className={classNames('carousel relative h-full overflow-hidden', className)}>
       <div className='flex flex-nowrap h-full'>
         <ButtonImageSlide imageUrl={prevImage} direction="left"
                           onClick={handlePrev}>{'<'}</ButtonImageSlide>
@@ -59,6 +77,7 @@ export default function Carousel({ children, className, nextImage, prevImage, on
           }}
           className="min-w-full inline-block"
           style={{
+            // animation: 'moveSlideshow 3s linear infinite',
             // transform: `translateX(${index * containerWidth}px)`,
             // transition: 'transform 0.5s ease-in-out',
           }}
@@ -66,7 +85,7 @@ export default function Carousel({ children, className, nextImage, prevImage, on
           {child}
         </div>)}
         <ButtonImageSlide imageUrl={nextImage} direction="right"
-                          onClick={handleNext}>{'>'}</ButtonImageSlide>
+          onClick={handleNext}>{'>'}</ButtonImageSlide>
       </div>
     </div>);
 }
