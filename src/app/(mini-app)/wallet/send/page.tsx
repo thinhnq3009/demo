@@ -1,29 +1,19 @@
-"user client";
-import WalletHeader from "@/components/common/header/Wallet";
+'user client';
+import WalletHeader from '@/components/common/header/Wallet';
 import WalletDropDownSimple, {
   WalletDropdownMenuData,
-} from "@/components/common/WalletDropDown";
+} from '@/components/common/WalletDropDown';
 
-export const Coin: WalletDropdownMenuData[] = [
+const coin: WalletDropdownMenuData[] = [
   {
-    title: "Toncoin",
+    title: 'Toncoin',
     value: 2,
-    imageUrl: "/assets/item/ton.svg",
+    imageUrl: '/assets/item/ton.svg',
   },
   {
-    title: "$NUD",
+    title: '$NUD',
     value: 1,
-    imageUrl: "/assets/item/nud.svg",
-  },
-];
-export const currency: WalletDropdownMenuData[] = [
-  {
-    title: "USD",
-    value: 1,
-  },
-  {
-    title: "EUR",
-    value: 2,
+    imageUrl: '/assets/item/nud.svg',
   },
 ];
 
@@ -38,7 +28,7 @@ export default function SendWalletPage() {
         <WalletDropDownSimple
           title="$NUD"
           href="/assets/item/nud.svg"
-          data={Coin} // Truyền danh sách menu vào component
+          data={coin}
         />
       </div>
 

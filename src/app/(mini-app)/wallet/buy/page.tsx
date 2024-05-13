@@ -1,14 +1,35 @@
-import WalletHeader from "@/components/common/header/Wallet";
-import WalletDropDownSimple from "@/components/common/WalletDropDown";
-import { Coin, currency } from "../send/page";
+import WalletHeader from '@/components/common/header/Wallet';
+import WalletDropDownSimple, { WalletDropdownMenuData } from '@/components/common/WalletDropDown';
 
+const coin: WalletDropdownMenuData[] = [
+  {
+    title: 'Toncoin',
+    value: 2,
+    imageUrl: '/assets/item/ton.svg',
+  },
+  {
+    title: '$NUD',
+    value: 1,
+    imageUrl: '/assets/item/nud.svg',
+  },
+];
+ const currency: WalletDropdownMenuData[] = [
+  {
+    title: 'USD',
+    value: 1,
+  },
+  {
+    title: 'EUR',
+    value: 2,
+  },
+];
 export default function BuyWalletPage() {
   return (
     <main className="  px-2 gap-6 flex flex-col ">
       <WalletHeader title="Buy token" href="/wallet" />
       <p className="text-base font-mochi text-[#FFFFFF]">Select a token</p>
       <WalletDropDownSimple
-        data={Coin}
+        data={coin}
         title="$NUD"
         href="/assets/item/nud.svg"
       />
