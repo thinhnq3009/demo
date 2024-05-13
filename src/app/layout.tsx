@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.scss';
 import { ReactNode } from 'react';
@@ -10,10 +10,15 @@ export const metadata: Metadata = {
   description: 'TON App',
 };
 
+export const viewport: Viewport = {
+  maximumScale: 1,
+  initialScale: 1,
+};
+
 export default function RootLayout({ children }: Readonly<{ children: ReactNode; }>) {
   return (
-        <html lang="en">
-        <body className={inter.className}>{children}</body>
-        </html>
+    <html lang="en">
+    <body className={inter.className}>{children}</body>
+    </html>
   );
 }

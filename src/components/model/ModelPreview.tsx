@@ -4,8 +4,12 @@ import { Environment, OrbitControls, useGLTF } from '@react-three/drei';
 import { Suspense, useState } from 'react';
 import { AnimationMixer } from 'three';
 
-const Character = () => {
-  const { scene: character, animations } = useGLTF('/assets/models/Soldier.glb');
+type CharacterProps = {
+  modelUrl: string
+};
+
+const Character = ({ modelUrl }: CharacterProps) => {
+  const { scene: character, animations } = useGLTF(modelUrl);
   console.log(animations);
   console.log(character);
   const mixer = new AnimationMixer(character);
@@ -19,19 +23,20 @@ const Character = () => {
 
   return <primitive position={[0, y, 0]} object={character} scale={s}/>;
 };
-export default function ModelPreview() {
+export default function ModelPreview({ modelUrl }: CharacterProps) {
   const [router] = useState(Math.PI / 2.22);
+  // return <>ModelPreview</>;
   return <Canvas>
         <ambientLight intensity={2}/>
         <pointLight position={[10, 10, 10]}/>
         <spotLight position={[0, -10, 0]}/>
         <Suspense fallback={null}>
-            <Character/>
+            <Character modelUrl={modelUrl}/>
             <Environment preset="sunset"/>
             <OrbitControls
                 scale={[10, 10, 10]}
-                enableZoom={false}
-                enablePan={false}
+                enableZoom={true}
+                enablePan={true}
                 enableRotate={true}
                 minPolarAngle={router}
                 maxPolarAngle={router}

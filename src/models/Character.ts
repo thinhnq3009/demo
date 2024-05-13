@@ -1,0 +1,1 @@
+export type CharacterName = 'Azusa Nakano' | 'Edge Runner Lucy' | 'Sakura';

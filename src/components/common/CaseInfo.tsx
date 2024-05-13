@@ -2,7 +2,7 @@ import Image from 'next/image';
 import ButtonImageArrow from '@/components/button/ButtonImageArrow';
 
 export default function CaseInfo() {
-  return <div className="flex justify-center gap-x-8 mb-6">
+  return <div className="flex justify-center gap-x-8 mb-6 opacity-0">
         <div className="w-[100px] h-[100px] relative">
             <Image fill src="/assets/item/red-case.svg" alt="Red Case"/>
         </div>
