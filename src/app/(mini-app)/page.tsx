@@ -34,9 +34,9 @@ export default function HomePage() {
         <ChatPopup/>
         {/*<ModelPreview/> */}
         <Carousel defaultIndex={1} nextImage="/assets/avatar/model-1.svg" prevImage="/assets/avatar/model-2.svg">
-          <ModelPreview modelUrl="/assets/models/Soldier.glb"/>
-          <ModelPreview modelUrl="/assets/models/emily.glb"/>
-          <ModelPreview modelUrl="/assets/models/emily-2.glb"/>
+          <ModelPreview modelUrl="/assets/models/kpop.glb"/>
+          <ModelPreview modelUrl="/assets/models/femalemage.glb"/>
+          <ModelPreview modelUrl="/assets/models/demonic.glb"/>
         </Carousel>
       </main>
       <section className="text-center">
