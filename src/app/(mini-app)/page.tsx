@@ -4,6 +4,7 @@ import ButtonImageSquare from '@/components/button/ButtonImageSquare';
 import ModelPreview from '@/components/model/ModelPreview';
 import InputChat from '@/components/input/InputChat';
 import ChatPopup from '@/components/common/ChatPopup';
+import Link from 'next/link';
 import HomeContextProvider from '@/components/context/home/HomeContextProvider';
 import Carousel from '@/components/common/Carousel';
 import { FocusEventHandler } from 'react';
@@ -22,8 +23,9 @@ export default function HomePage() {
       <header className="font-mochi flex justify-between">
         <Profile coin={100} avatar={avt} ton={100} username={'Username'}/>
         <div className="flex flex-col gap-2">
-          <ButtonImageSquare image="\assets\item\wallet.svg"
-                             className="bg-[#2B0940]">Wallet</ButtonImageSquare>
+        <Link href="/wallet">
+          <ButtonImageSquare image="\assets\item\wallet.svg" className="bg-[#2B0940]">Wallet</ButtonImageSquare>
+        </Link>
           <ButtonImageSquare image="\assets\item\battle.svg"
                              className="bg-[#971C01]">Battle</ButtonImageSquare>
         </div>
