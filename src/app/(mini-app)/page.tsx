@@ -15,7 +15,7 @@ import Loading from '@/components/loading/loadingModel';
 import dynamic from 'next/dynamic';
 // import { useState } from 'react';
 
-const avt = '/assets/avatar/avt-2.jpg';
+// const avt = '/assets/avatar/avt-2.jpg';
 const LoadModelPreview = dynamic(() => import('@/components/model/ModelPreview'), {
   ssr: false,
   loading: () => <Loading />,
@@ -34,7 +34,7 @@ export default function HomePage() {
   return <HomeContextProvider>
     <div className="px-1 flex flex-col h-full">
       <header className="font-mochi flex justify-between">
-        <Profile coin={100} avatar={avt} ton={100} username={'Username'}/>
+        <Profile/>
         <div className="flex flex-col gap-2">
         <Link href="/wallet">
           <ButtonImageSquare image="\assets\item\wallet.svg" className="bg-[#2B0940]">Wallet</ButtonImageSquare>
@@ -58,9 +58,9 @@ export default function HomePage() {
           ))}
         </Carousel> */}
         <Carousel nextImage="/assets/avatar/model-1.svg" prevImage="/assets/avatar/model-2.svg">
-          <LoadModelPreview modelUrl="/assets/models/test5.glb"/>
-          <LoadModelPreview modelUrl="/assets/models/emily.glb"/>
-          <LoadModelPreview modelUrl="/assets/models/emily-2.glb"/>
+          <LoadModelPreview modelUrl="/assets/models/kpop.glb"/>
+          <LoadModelPreview modelUrl="/assets/models/femalemage.glb"/>
+          <LoadModelPreview modelUrl="/assets/models/demonic.glb"/>
         </Carousel>
       </main>
       <section className="text-center">

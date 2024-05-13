@@ -1,5 +1,6 @@
 'use client';
 import React from 'react';
+import GlobalContextProvider from '@/components/context/GlobalContextProvider';
 
 export default function BaseLayout({ children }: { children: React.ReactNode }) {
 
@@ -19,7 +20,9 @@ export default function BaseLayout({ children }: { children: React.ReactNode }) 
     <div className="w-base mx-auto pt-4 h-screen"
       // style={{ height: `${screenHeight}px` }}
     >
-      {children}
+      <GlobalContextProvider>
+        {children}
+      </GlobalContextProvider>
     </div>
   </div>;
 }

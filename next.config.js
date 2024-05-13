@@ -24,6 +24,11 @@ const nextConfig = {
                 hostname: 'img.pokemondb.net',
                 port: '',
             },
+            {
+                protocol: 'https',
+                hostname: 'api.telegram.org',
+                port: '',
+            },
         ],
     },
 }
