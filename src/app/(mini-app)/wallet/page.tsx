@@ -1,5 +1,5 @@
 'use client';
-import { FaArrowDown, FaArrowUp, FaRegCopy, FaPlus } from 'react-icons/fa';
+import { FaArrowDown, FaArrowUp, FaPlus, FaRegCopy } from 'react-icons/fa';
 import { MdOutlineSwapHoriz } from 'react-icons/md';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -11,15 +11,14 @@ export default function WalletPage() {
   const [selectedAsset, setSelectedAsset] = useState('');
   const [selectedSrcImg, setSelectedSrcImg] = useState('');
   const closeBalance = () => {
-    setSelectedAsset(''); 
+    setSelectedAsset('');
   };
-  return (
-    <main className="flex flex-col px-2 h-full gap-2 ">
-      {!selectedAsset && (
-        <>
-          <WalletHeader title="Wallet" href="/" />
+  return (<main className="flex flex-col px-2 h-full gap-2 ">
+      {!selectedAsset && (<>
+          <WalletHeader title="Wallet" href="/"/>
 
-          <div className="border border-[#4E1724] bg-[#4E1724] rounded-2xl gap-4 justify-center px-4 py-3 flex flex-col">
+          <div
+            className="border border-[#4E1724] bg-[#4E1724] rounded-2xl gap-4 justify-center px-4 py-3 flex flex-col">
             <p className="text-center text-base font-mochi text-[#FFFFFF]">
               Total Balance
             </p>
@@ -35,15 +34,16 @@ export default function WalletPage() {
               <p className="text-lg text-[#9F4C4C] font-mochi text-center font-bold">
                 UQCXXI...iXlnP
               </p>
-              <FaRegCopy className="copy-icon cursor-pointer w-6 h-6 text-[#FFFFFF]" />
+              <FaRegCopy className="copy-icon cursor-pointer w-6 h-6 text-[#FFFFFF]"/>
             </div>
             <div className=" flex justify-center w-full gap-6 ">
               <Link
                 className=" gap-2 flex flex-col items-center justify-center"
                 href="/wallet/send"
               >
-                <div className="border border-[#751D1D] bg-[#751D1D] rounded-2xl w-14 h-16 flex items-center justify-center relative">
-                  <FaArrowUp className="w-7 h-7 text-white " />
+                <div
+                  className="border border-[#751D1D] bg-[#751D1D] rounded-2xl w-14 h-16 flex items-center justify-center relative">
+                  <FaArrowUp className="w-7 h-7 text-white "/>
                 </div>
                 <p className="text-base font-mochi text-[#FFFFFF] text-center">
                   Send
@@ -53,8 +53,9 @@ export default function WalletPage() {
                 className=" gap-2 flex flex-col items-center justify-center"
                 href="/wallet/receive"
               >
-                <div className="border border-[#751D1D] bg-[#751D1D] rounded-2xl w-14 h-16 flex items-center justify-center relative">
-                  <FaArrowDown className="w-7 h-7 text-white " />
+                <div
+                  className="border border-[#751D1D] bg-[#751D1D] rounded-2xl w-14 h-16 flex items-center justify-center relative">
+                  <FaArrowDown className="w-7 h-7 text-white "/>
                 </div>
                 <p className="text-base font-mochi text-[#FFFFFF] text-center">
                   Receive
@@ -64,8 +65,9 @@ export default function WalletPage() {
                 className=" gap-2 flex flex-col items-center justify-center"
                 href="/wallet/buy"
               >
-                <div className="border border-[#751D1D] bg-[#751D1D] rounded-2xl w-14 h-16 flex items-center justify-center relative">
-                  <FaPlus className="w-7 h-7 text-white " />
+                <div
+                  className="border border-[#751D1D] bg-[#751D1D] rounded-2xl w-14 h-16 flex items-center justify-center relative">
+                  <FaPlus className="w-7 h-7 text-white "/>
                 </div>
                 <p className="text-base font-mochi text-[#FFFFFF] text-center">
                   Buy
@@ -75,8 +77,9 @@ export default function WalletPage() {
                 className=" gap-2 flex flex-col items-center justify-center"
                 href="/wallet/swap"
               >
-                <div className="border border-[#751D1D] bg-[#751D1D] rounded-2xl w-14 h-16 flex items-center justify-center relative">
-                  <MdOutlineSwapHoriz className="w-7 h-7 text-white " />
+                <div
+                  className="border border-[#751D1D] bg-[#751D1D] rounded-2xl w-14 h-16 flex items-center justify-center relative">
+                  <MdOutlineSwapHoriz className="w-7 h-7 text-white "/>
                 </div>
                 <p className="text-base font-mochi text-[#FFFFFF] text-center">
                   Swap
@@ -140,15 +143,11 @@ export default function WalletPage() {
               There is no transaction history yet
             </p>
           </div>
-        </>
-      )}
-      {selectedAsset && (
-       <WalletBalancePage
-       title={selectedAsset}
-       srcImage={`/assets/item/${selectedSrcImg}.svg`}
-       close={closeBalance} 
-     />
-      )}
-    </main>
-  );
+        </>)}
+      {selectedAsset && (<WalletBalancePage
+          title={selectedAsset}
+          srcImage={`/assets/item/${selectedSrcImg}.svg`}
+          close={closeBalance}
+        />)}
+    </main>);
 }

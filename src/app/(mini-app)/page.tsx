@@ -21,7 +21,7 @@ export default function HomePage() {
   return <HomeContextProvider>
     <div className="px-1 flex flex-col h-full">
       <header className="font-mochi flex justify-between">
-        <Profile coin={100} avatar={avt} ton={100} username={'Username'}/>
+        <Profile/>
         <div className="flex flex-col gap-2">
         <Link href="/wallet">
           <ButtonImageSquare image="\assets\item\wallet.svg" className="bg-[#2B0940]">Wallet</ButtonImageSquare>
