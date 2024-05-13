@@ -1,3 +1,5 @@
+'use client';
+
 import Profile from '@/components/common/header/Profile';
 import ButtonImageSquare from '@/components/button/ButtonImageSquare';
 // import ModelPreview from '@/components/model/ModelPreview';
@@ -10,14 +12,24 @@ import HomeContextProvider from '@/components/context/home/HomeContextProvider';
 import Carousel from '@/components/common/Carousel';
 import Loading from '@/components/loading/loadingModel';
 import dynamic from 'next/dynamic';
+import { SetStateAction, useState } from 'react';
 
 const avt = '/assets/avatar/avt-2.jpg';
 const LoadModelPreview = dynamic(() => import('@/components/model/ModelPreview'), {
   ssr: false,
   loading: () => <Loading />,
 });
+// const models = [
+//   '/assets/models/test4.gltf',
+//   '/assets/models/emily.glb',
+//   '/assets/models/emily-2.glb',
+// ];
 
 export default function HomePage() {
+  // const [activeIndex, setActiveIndex] = useState(0);
+  // const handleSlideChange = (index: SetStateAction<number>) => {
+  //   setActiveIndex(index);
+  // };
   return <HomeContextProvider>
     <div className="px-1 flex flex-col h-full">
       <header className="font-mochi flex justify-between">
@@ -32,8 +44,15 @@ export default function HomePage() {
       <main className="flex-1 relative">
         <ChatPopup/>
         {/*<ModelPreview/> */}
+        {/* <Carousel nextImage="/assets/avatar/model-1.svg" prevImage="/assets/avatar/model-2.svg" onSlideChange={handleSlideChange}>
+          {models.map((model, index) => (
+            <div key={index}>
+            {index === activeIndex && <LoadModelPreview modelUrl={model} />}
+          </div>
+          ))}
+        </Carousel> */}
         <Carousel nextImage="/assets/avatar/model-1.svg" prevImage="/assets/avatar/model-2.svg">
-          <LoadModelPreview modelUrl="/assets/models/Soldier.glb"/>
+          <LoadModelPreview modelUrl="/assets/models/test5.glb"/>
           <LoadModelPreview modelUrl="/assets/models/emily.glb"/>
           <LoadModelPreview modelUrl="/assets/models/emily-2.glb"/>
         </Carousel>

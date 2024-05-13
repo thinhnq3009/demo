@@ -6,9 +6,9 @@ import { AnimationMixer } from 'three';
 
 type CharacterProps = {
   modelUrl: string
-}
+};
 
-const Character = ({modelUrl}: CharacterProps) => {
+const Character = ({ modelUrl }: CharacterProps) => {
   const { scene: character, animations } = useGLTF(modelUrl);
   console.log(animations);
   console.log(character);
@@ -23,8 +23,9 @@ const Character = ({modelUrl}: CharacterProps) => {
 
   return <primitive position={[0, y, 0]} object={character} scale={s}/>;
 };
-export default function ModelPreview({modelUrl}: CharacterProps) {
-  // const [router] = useState(Math.PI / 2.22);
+export default function ModelPreview({ modelUrl }: CharacterProps) {
+  const [router] = useState(Math.PI / 2.22);
+  // return <>ModelPreview</>;
   return <Canvas>
         <ambientLight intensity={2}/>
         <pointLight position={[10, 10, 10]}/>
@@ -37,8 +38,8 @@ export default function ModelPreview({modelUrl}: CharacterProps) {
                 enableZoom={true}
                 enablePan={true}
                 enableRotate={true}
-                // minPolarAngle={router}
-                // maxPolarAngle={router}
+                minPolarAngle={router}
+                maxPolarAngle={router}
                 onUpdate={self => console.log(self)}/>
         </Suspense>
     </Canvas>;

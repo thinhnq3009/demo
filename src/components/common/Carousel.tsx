@@ -3,7 +3,6 @@
 import React, { ReactNode, useEffect, useMemo, useRef, useState } from 'react';
 import classNames from 'classnames';
 import ButtonImageSlide from '@/components/button/ButtonImageSilde';
-// import moveSlideshow from '@/styles/animation';
 // import ButtonImageSlide from '@/components/button/BottonImageSlide';
 
 type CaurouselProps = {
@@ -12,11 +11,13 @@ type CaurouselProps = {
   onChange?: (index: number, target: HTMLDivElement) => void;
   nextImage: string;
   prevImage: string;
+  defaultIndex?: number;
+  onSlideChange?: (index: number) => void;
 };
 
 
-export default function Carousel({ children, className, nextImage, prevImage, onChange }: CaurouselProps) {
-  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
+export default function Carousel({ children, className, nextImage, prevImage, onChange, defaultIndex = 0, onSlideChange }: CaurouselProps) {
+  const [currentSlideIndex, setCurrentSlideIndex] = useState(defaultIndex);
 
   const containerRef = useRef<HTMLDivElement>({} as HTMLDivElement);
   const childRefs = useRef<HTMLDivElement[]>([]);
@@ -41,6 +42,7 @@ export default function Carousel({ children, className, nextImage, prevImage, on
       }
     });
     onChange?.(currentSlideIndex, childRefs.current[currentSlideIndex]);
+    onSlideChange?.(currentSlideIndex);
   }, [currentSlideIndex]);
 
 

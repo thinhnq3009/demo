@@ -1,6 +1,6 @@
 'use client';
 
-import { InputHTMLAttributes, KeyboardEventHandler, useContext, useState } from 'react';
+import {createRef, InputHTMLAttributes, KeyboardEventHandler, useContext, useState} from 'react';
 import classNames from 'classnames';
 import { HomeContext } from '@/components/context/home/HomeContextProvider';
 import apiChat from '@/apis/chatApi';
@@ -18,12 +18,15 @@ export default function InputChat({ className, classNameInput, ...passProp }: In
   } = useContext(HomeContext);
   const [message, setMessage] = useState('');
 
+  const inputRef = createRef<HTMLInputElement>();
+
   // API
   const { getResponse } = apiChat();
 
   const handleSendMessage = () => {
     if (sending) return;
     setSending(true);
+    inputRef.current?.blur();
     setMessage('');
     getResponse(message)
       .then((res) => {
@@ -43,6 +46,7 @@ export default function InputChat({ className, classNameInput, ...passProp }: In
   return <div
     className={classNames("flex bg-[url('/assets/item/input-chat.svg')] bg-no-repeat bg-center w-[318px] px-4 py-1.5", className)}>
     <input
+      ref={inputRef}
       value={message}
       onKeyUp={handleKeyUp}
       onChange={(e) => setMessage(e.target.value)}
