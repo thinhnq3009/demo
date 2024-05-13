@@ -3,7 +3,7 @@ import React from 'react';
 const Loading = () => {
   return (
     <>
-      <div className="wrapper sm:mt-52 md:mt-72">
+      <div className="wrapper absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
         <div className="kinetic"></div>
         <div className="wording">
           <div className="letter">L</div>

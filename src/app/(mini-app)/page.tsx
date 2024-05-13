@@ -13,7 +13,7 @@ import HomeContextProvider from '@/components/context/home/HomeContextProvider';
 import Carousel from '@/components/common/Carousel';
 import Loading from '@/components/loading/loadingModel';
 import dynamic from 'next/dynamic';
-import { SetStateAction, useState } from 'react';
+// import { useState } from 'react';
 
 const avt = '/assets/avatar/avt-2.jpg';
 const LoadModelPreview = dynamic(() => import('@/components/model/ModelPreview'), {
@@ -28,7 +28,7 @@ const LoadModelPreview = dynamic(() => import('@/components/model/ModelPreview')
 
 export default function HomePage() {
   // const [activeIndex, setActiveIndex] = useState(0);
-  // const handleSlideChange = (index: SetStateAction<number>) => {
+  // const handleSlideChange = (index: number) => {
   //   setActiveIndex(index);
   // };
   return <HomeContextProvider>
@@ -46,11 +46,15 @@ export default function HomePage() {
       <main className="flex-1 relative">
         <ChatPopup/>
         {/*<ModelPreview/> */}
-        {/* <Carousel nextImage="/assets/avatar/model-1.svg" prevImage="/assets/avatar/model-2.svg" onSlideChange={handleSlideChange}>
+        {/* <Carousel className='relative' nextImage="/assets/avatar/model-1.svg" prevImage="/assets/avatar/model-2.svg" onSlideChange={handleSlideChange}>
           {models.map((model, index) => (
-            <div key={index}>
-            {index === activeIndex && <LoadModelPreview modelUrl={model} />}
-          </div>
+            <div key={model} className='h-full'>
+              {index === activeIndex && (
+              <div className='h-full'>
+                <LoadModelPreview key={model} modelUrl={model} />
+              </div>
+              )}
+            </div>
           ))}
         </Carousel> */}
         <Carousel nextImage="/assets/avatar/model-1.svg" prevImage="/assets/avatar/model-2.svg">
