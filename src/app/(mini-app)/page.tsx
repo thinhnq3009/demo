@@ -57,10 +57,19 @@ export default function HomePage() {
             </div>
           ))}
         </Carousel> */}
-        <Carousel nextImage="/assets/avatar/model-1.svg" prevImage="/assets/avatar/model-2.svg">
+        <Carousel nextImage="/assets/avatar/model-1.svg" prevImage="/assets/avatar/model-2.svg">          
+          <LoadModelPreview modelUrl="/assets/models/steamgirl.glb"/>          
+          <LoadModelPreview modelUrl="/assets/models/gangster.glb"/>
+          <LoadModelPreview modelUrl="/assets/models/corgi.glb"/>
+          <LoadModelPreview modelUrl="/assets/models/archer.glb"/>
           <LoadModelPreview modelUrl="/assets/models/kpop.glb"/>
-          <LoadModelPreview modelUrl="/assets/models/femalemage.glb"/>
+          <LoadModelPreview modelUrl="/assets/models/spacerange.glb"/>
+          <LoadModelPreview modelUrl="/assets/models/ninja.glb"/>
+          <LoadModelPreview modelUrl="/assets/models/nightsteal.glb"/>
+          <LoadModelPreview modelUrl="/assets/models/necromance.glb"/>
           <LoadModelPreview modelUrl="/assets/models/demonic.glb"/>
+          <LoadModelPreview modelUrl="/assets/models/femalemage.glb"/>
+          <LoadModelPreview modelUrl="/assets/models/monkeyking.glb"/>
         </Carousel>
       </main>
       <section className="text-center">
