@@ -17,6 +17,7 @@ const nextConfig = {
         ignoreDuringBuilds: true,
     },
     images: {
+        // domains: ["placehold.co"],
         domains: ['res.cloudinary.com'],
         remotePatterns: [
             {

@@ -10,10 +10,11 @@ import InputChat from '@/components/input/InputChat';
 import ChatPopup from '@/components/common/ChatPopup';
 import Link from 'next/link';
 import HomeContextProvider from '@/components/context/home/HomeContextProvider';
-import Carousel from '@/components/common/Carousel';
+// import Carousel from '@/components/common/Carousel';
 import Loading from '@/components/loading/loadingModel';
 import dynamic from 'next/dynamic';
 // import { useState } from 'react';
+import Carousel from '@/components/common/CarouselTest';
 
 // const avt = '/assets/avatar/avt-2.jpg';
 const LoadModelPreview = dynamic(() => import('@/components/model/ModelPreview'), {
@@ -57,10 +58,17 @@ export default function HomePage() {
             </div>
           ))}
         </Carousel> */}
-        <Carousel nextImage="/assets/avatar/model-1.svg" prevImage="/assets/avatar/model-2.svg">
-          <LoadModelPreview modelUrl="/assets/models/kpop.glb"/>
-          <LoadModelPreview modelUrl="/assets/models/femalemage.glb"/>
-          <LoadModelPreview modelUrl="/assets/models/demonic.glb"/>
+        {/* <Carousel nextImage="/assets/avatar/model-1.svg" prevImage="/assets/avatar/model-2.svg"> */}
+        <Carousel loop>
+            <div className="relative h-full flex-[0_0_100%]">
+              <LoadModelPreview modelUrl="/assets/models/kpop.glb"/>
+            </div>
+            <div className="relative h-full flex-[0_0_100%]">
+              <LoadModelPreview modelUrl="/assets/models/femalemage.glb"/>         
+            </div>
+            <div className="relative h-full flex-[0_0_100%]">
+              <LoadModelPreview modelUrl="/assets/models/demonic.glb"/>
+            </div>
         </Carousel>
       </main>
       <section className="text-center">
