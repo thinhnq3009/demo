@@ -18,6 +18,7 @@ const nextConfig = {
     },
     images: {
         domains: ['res.cloudinary.com'],
+        contentDispositionType: 'attachment',
         remotePatterns: [
             {
                 protocol: 'https',
