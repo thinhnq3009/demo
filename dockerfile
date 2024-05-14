@@ -19,6 +19,7 @@ COPY --from=builder /dapp/public ./public
 COPY --from=builder /dapp/.next ./.next
 COPY --from=builder /dapp/node_modules ./node_modules
 COPY --from=builder /dapp/package.json ./package.json
+COPY ./next.config.js ./next.config.js
 
 EXPOSE 3000
 CMD ["yarn", "start"]
