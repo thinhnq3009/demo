@@ -7,6 +7,8 @@ const axiosClient = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
+  timeout: 5000,
+  timeoutErrorMessage: 'Request timeout',
 });
 
 let isRefreshing = false;

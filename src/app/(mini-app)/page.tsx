@@ -61,15 +61,42 @@ export default function HomePage() {
         {/* <Carousel nextImage="/assets/avatar/model-1.svg" prevImage="/assets/avatar/model-2.svg"> */}
         <Carousel loop>
             <div className="relative h-full flex-[0_0_100%]">
+              <LoadModelPreview modelUrl="/assets/models/steamgirl.glb"/>          
+            </div>
+            <div className="relative h-full flex-[0_0_100%]">
+              <LoadModelPreview modelUrl="/assets/models/gangster.glb"/>
+            </div>
+            <div className="relative h-full flex-[0_0_100%]">
+              <LoadModelPreview modelUrl="/assets/models/corgi.glb"/>
+            </div>
+            <div className="relative h-full flex-[0_0_100%]">
+              <LoadModelPreview modelUrl="/assets/models/archer.glb"/>
+            </div>
+            <div className="relative h-full flex-[0_0_100%]">
               <LoadModelPreview modelUrl="/assets/models/kpop.glb"/>
             </div>
             <div className="relative h-full flex-[0_0_100%]">
-              <LoadModelPreview modelUrl="/assets/models/femalemage.glb"/>         
+              <LoadModelPreview modelUrl="/assets/models/spacerange.glb"/>
+            </div>
+            <div className="relative h-full flex-[0_0_100%]">
+              <LoadModelPreview modelUrl="/assets/models/ninja.glb"/>
+            </div>
+            <div className="relative h-full flex-[0_0_100%]">
+              <LoadModelPreview modelUrl="/assets/models/nightsteal.glb"/>
+            </div>
+            <div className="relative h-full flex-[0_0_100%]">
+              <LoadModelPreview modelUrl="/assets/models/necromance.glb"/>
             </div>
             <div className="relative h-full flex-[0_0_100%]">
               <LoadModelPreview modelUrl="/assets/models/demonic.glb"/>
             </div>
-        </Carousel>
+            <div className="relative h-full flex-[0_0_100%]">
+              <LoadModelPreview modelUrl="/assets/models/femalemage.glb"/>
+            </div>
+            <div className="relative h-full flex-[0_0_100%]">
+              <LoadModelPreview modelUrl="/assets/models/monkeyking.glb"/>
+            </div>
+          </Carousel>
       </main>
       <section className="text-center">
         <InputChat className="mb-2 mx-auto" placeholder={'Start typing ...'}/>

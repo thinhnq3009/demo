@@ -19,6 +19,7 @@ const nextConfig = {
     images: {
         // domains: ["placehold.co"],
         domains: ['res.cloudinary.com'],
+        contentDispositionType: 'attachment',
         remotePatterns: [
             {
                 protocol: 'https',
