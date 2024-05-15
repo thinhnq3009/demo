@@ -22,7 +22,6 @@ const CarouselControls = ({ canScrollPrev, canScrollNext, onPrev, onNext, direct
               onPrev();
             }
           }}
-          disabled={!canScrollPrev}
           className={classNames('py-[7px] absolute top-1/2 -translate-y-1/2 z-10', className, {
             "left-0 pl-7 pr-0.5 bg-[url('/assets/bg/slide-btn-l.svg')]": direction === 'left',
           })} {...passProps}>
@@ -35,7 +34,6 @@ const CarouselControls = ({ canScrollPrev, canScrollNext, onPrev, onNext, direct
               onNext();
             }
           }}
-          disabled={!canScrollNext}
           className={classNames('py-[7px] absolute top-1/2 -translate-y-1/2 z-10', className, {
             "right-0 pr-7 pl-0.5 bg-[url('/assets/bg/slide-btn-r.svg')]": direction === 'right',
           })} {...passProps}>
