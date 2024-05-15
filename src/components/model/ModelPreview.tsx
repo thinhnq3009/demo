@@ -3,6 +3,7 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { Environment, OrbitControls, useGLTF } from '@react-three/drei';
 import { Suspense, useState } from 'react';
 import { AnimationMixer } from 'three';
+import Loading from '@/components/loading/loadingModel';
 
 type CharacterProps = {
   modelUrl: string
@@ -30,7 +31,7 @@ export default function ModelPreview({ modelUrl }: CharacterProps) {
         <ambientLight intensity={2}/>
         <pointLight position={[10, 10, 10]}/>
         <spotLight position={[0, -10, 0]}/>
-        <Suspense fallback={null}>
+        <Suspense fallback={<Loading />}>
             <Character modelUrl={modelUrl}/>
             <Environment preset="sunset"/>
             <OrbitControls
