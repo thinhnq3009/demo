@@ -3,15 +3,6 @@
 import classNames from 'classnames';
 import Image from 'next/image';
 
-// type Props = {
-//   canScrollPrev: boolean;
-//   canScrollNext: boolean;
-//   onPrev(): void;
-//   onNext(): void;
-//   direction: 'left' | 'right';
-//   imageUrl: string;
-//   className: string;
-// };
 type Props = {
   canScrollPrev: boolean;
   canScrollNext: boolean;
