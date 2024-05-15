@@ -10,6 +10,7 @@ const config: Config = {
     extend: {
       fontFamily: {
         'mochi': '"Mochiy Pop One", sans-serif',
+        'mina': '"Mina", sans-serif',
       },
       backgroundImage: {
         'city': 'url("/assets/bg/bg-4.svg")',

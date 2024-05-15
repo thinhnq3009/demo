@@ -14,7 +14,7 @@ export default function Profile() {
 
   return <div
     className="flex gap-1.5 py-1.5 px-2 w-[246px] h-[52px] text-white bg-[url('/assets/rect/rect-avt.svg')] bg-no-repeat">
-    <Image className="border-image-orange" width={40} height={40} src={avatarUrl} alt={'Avatar'}/>
+    <img className="border-image-orange" width={40} height={40} src={avatarUrl} alt={'Avatar'}/>
     <div className="flex flex-col justify-between">
       <div className="font-mochi text-2xs">{user?.full_name}</div>
       <div className="flex gap-2.5">
