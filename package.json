@@ -13,6 +13,7 @@
     "@next/env": "^14.2.3",
     "@react-three/drei": "^9.105.6",
     "@react-three/fiber": "^8.16.3",
+    "@tonconnect/ui-react": "^2.0.2",
     "axios": "^1.6.8",
     "bootstrap": "^5.3.3",
     "classnames": "^2.5.1",
