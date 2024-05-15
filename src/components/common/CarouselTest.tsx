@@ -1,10 +1,13 @@
 'use client';
 import useEmblaCarousel from 'embla-carousel-react';
+import {
+  type EmblaOptionsType as CarouselOptions,
+} from 'embla-carousel';
 import { PropsWithChildren } from 'react';
 import React from 'react';
 import CarouselControls from './CarouselControls';
 
-type Props = PropsWithChildren;
+type Props = PropsWithChildren & CarouselOptions;
 
 const Carousel = ({ children, ...options }: Props) => {
   const [emblaRef, emblaApi] = useEmblaCarousel({ ...options, watchDrag: false });
