@@ -36,7 +36,7 @@ const Carousel = ({ children, onSlideChange, ...options }: Props) => {
 
   return (
     <>
-      <div className="h-full max-h-[80%]" ref={emblaRef}>
+      <div className="overflow-hidden h-full max-h-[80%]" ref={emblaRef}>
         <div className="flex flex-nowrap h-full">{children}</div>
       </div>
       <CarouselControls 

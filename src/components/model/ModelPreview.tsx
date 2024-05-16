@@ -7,32 +7,51 @@ import Loading from '@/components/loading/loadingModel';
 
 type CharacterProps = {
   modelUrl: string
+  active: boolean
+  onDispose?: () => void;
 };
 
-const Character = ({ modelUrl }: CharacterProps) => {
+const Character = ({ modelUrl, active }: CharacterProps) => {
   const { scene: character, animations } = useGLTF(modelUrl);
   console.log(animations);
   console.log(character);
   const mixer = new AnimationMixer(character);
   const action = mixer.clipAction(animations[0]);
   action.play();
-  const [y] = useState(-2.6);
+  const [y] = useState(-4);
   const [s] = useState(3.2);
   useFrame((state, delta) => {
+    if (!active) return;
     mixer.update(delta);
   });
 
   return <primitive position={[0, y, 0]} object={character} scale={s}/>;
 };
-export default function ModelPreview({ modelUrl }: CharacterProps) {
+export default function ModelPreview({ modelUrl, active }: CharacterProps) {
   const [router] = useState(Math.PI / 2.22);
+  // function removeObject3D(object3D) {
+  //   if (!(object3D instanceof THREE.Object3D)) return false;
+
+  //   // for better memory management and performance
+  //   if (object3D.geometry) object3D.geometry.dispose();
+
+  //   if (object3D.material) {
+  //     if (object3D.material instanceof Array) {
+  //       object3D.material.forEach((material: { dispose: () => unknown; }) => material.dispose());
+  //     } else {
+  //       object3D.material.dispose();
+  //     }
+  //   }
+  //   object3D.removeFromParent(); 
+  //   return true;
+  // }
   // return <>ModelPreview</>;
   return <Canvas>
         <ambientLight intensity={2}/>
         <pointLight position={[10, 10, 10]}/>
         <spotLight position={[0, -10, 0]}/>
         <Suspense fallback={<Loading />}>
-            <Character modelUrl={modelUrl}/>
+            <Character active={active} modelUrl={modelUrl}/>
             <Environment preset="sunset"/>
             <OrbitControls
                 scale={[10, 10, 10]}

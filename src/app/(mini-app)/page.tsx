@@ -7,7 +7,7 @@ import ChatPopup from '@/components/common/ChatPopup';
 import Link from 'next/link';
 import HomeContextProvider from '@/components/context/home/HomeContextProvider';
 import Carousel from '@/components/common/CarouselTest';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ModelPreview from '@/components/model/ModelPreview';
 
 const models = [
@@ -26,11 +26,38 @@ const models = [
 ];
 export default function HomePage() {
   const [activeIndex, setActiveIndex] = useState(0);
-  
+  const [loadedModels, setLoadedModels] = useState<(JSX.Element | null)[]>(Array(models.length).fill(null));
+
   const handleSlideChange = (index: number) => {
-    console.log('Slide changed to:', index);
     setActiveIndex(index);
+
+    const newLoadedModels = [...loadedModels];
+    const lengthModels = models.length - 1;
+    const indexPrev = index === 0 ? lengthModels : index - 1;
+    const indexNext = index === lengthModels ? 0 : index + 1;
+
+    if (!loadedModels[index] || !loadedModels[indexPrev] || !loadedModels[indexNext]) {
+      if (!loadedModels[index]) {
+        newLoadedModels[index] = <ModelPreview key={models[index]} active={true} modelUrl={models[index]} />;
+      }
+      if (!loadedModels[indexPrev]) {
+        newLoadedModels[indexPrev] = <ModelPreview key={models[indexPrev]} active={true} modelUrl={models[indexPrev]} />;
+      }
+      if (!loadedModels[indexNext]) {
+        newLoadedModels[indexNext] = <ModelPreview key={models[indexNext]} active={true} modelUrl={models[indexNext]} />;
+      }
+      // for (let i = 0; i < models.length; i++) {
+      //   if (i !== index && i !== indexPrev && i !== indexNext && newLoadedModels[i]) {
+      //     newLoadedModels[i] = null;
+      //     // newLoadedModels.splice(i, 1);
+      //   }
+      // }
+      setLoadedModels(newLoadedModels);
+    }
   };
+  useEffect(() => {
+    handleSlideChange(activeIndex);
+  }, []);
   return <HomeContextProvider>
     <div className="px-1 flex flex-col h-full">
       <header className="font-mochi flex justify-between">
@@ -43,17 +70,14 @@ export default function HomePage() {
                              className="bg-[#971C01]">Battle</ButtonImageSquare>
         </div>
       </header>
-      <main className="flex-1 relative">
+      <main className="flex-1 relative sm:mt-3 md:mt-10">
         <ChatPopup/>   
         <Carousel loop onSlideChange={handleSlideChange}>
-            {models.map((model, index) => (
+          {models.map((model, index) => (
             <div key={model} className="relative h-full flex-[0_0_100%]">
-              {index}
-              {activeIndex}
-              {index === activeIndex && 
-                <ModelPreview key={model} modelUrl={model} />}
+              {loadedModels[index]}
             </div>
-            ))}
+          ))}
         </Carousel>
         {/* <Carousel loop>
             <div className="relative h-full flex-[0_0_100%]">

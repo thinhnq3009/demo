@@ -12,7 +12,7 @@ const config: Config = {
         'mochi': '"Mochiy Pop One", sans-serif',
       },
       backgroundImage: {
-        'city': 'url("/assets/bg/bg-4.svg")',
+        'city': 'url("/assets/bg/bg-5.svg")',
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
                     'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',

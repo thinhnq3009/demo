@@ -4,7 +4,7 @@ import { Html } from '@react-three/drei';
 const Loading = () => {
   return (
    <Html>
-    <div className="wrapper absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+    <div className="wrapper sm:mt-2 md:mt-5 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
          <div className="kinetic"></div>
          <div className="wording">
            <div className="letter">L</div>
