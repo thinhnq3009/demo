@@ -17,7 +17,7 @@ export default function BaseLayout({ children }: { children: React.ReactNode }) 
   //   };
   // }, []);
   return <div className="bg-city bg-cover bg-center bg-no-repeat h-screen w-100 ">
-    <div className="w-base mx-auto pt-4 h-screen"
+    <div className="w-[396px] mx-auto pt-5 h-screen"
       // style={{ height: `${screenHeight}px` }}
     >
       <GlobalContextProvider>
