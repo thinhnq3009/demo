@@ -1,34 +1,18 @@
 'use client';
-// components/Carousel.tsx
-import useEmblaCarousel, { EmblaOptionsType } from 'embla-carousel-react';
-import { PropsWithChildren, useEffect, useState } from 'react';
-import Dots from '@/components/model/Dots';
+import useEmblaCarousel from 'embla-carousel-react';
+import {
+  type EmblaOptionsType as CarouselOptions,
+} from 'embla-carousel';
+import { PropsWithChildren } from 'react';
 import React from 'react';
 import CarouselControls from './CarouselControls';
 
-type Props = PropsWithChildren & EmblaOptionsType;
+type Props = PropsWithChildren & CarouselOptions;
 
 const Carousel = ({ children, ...options }: Props) => {
-  // const [emblaRef, emblaApi] = useEmblaCarousel({ ...options, dragFree: false });
   const [emblaRef, emblaApi] = useEmblaCarousel({ ...options, watchDrag: false });
-  const length = React.Children.count(children);
-  const [selectedIndex, setSelectedIndex] = useState(0);
   const canScrollNext = !!emblaApi?.canScrollNext();
   const canScrollPrev = !!emblaApi?.canScrollPrev();
-
-
-  useEffect(() => {
-    function selectHandler() {
-      const index = emblaApi?.selectedScrollSnap();
-      setSelectedIndex(index || 0);
-    }
-    emblaApi?.on('select', selectHandler);
-    // emblaApi?.destroy();
-    return () => {
-      emblaApi?.off('select', selectHandler);
-    };
-  }, [emblaApi]);
-  
 
   return (
     <>
@@ -55,7 +39,6 @@ const Carousel = ({ children, ...options }: Props) => {
               className={''}    
         >
         </CarouselControls>
-      {/* <Dots itemsLength={length} selectedIndex={selectedIndex} /> */}
       
     </>
   );
