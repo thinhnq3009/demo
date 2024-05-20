@@ -32,6 +32,7 @@ function WalletDropDownSimple({
   href,
   data,
   value,
+  onChange,
   onChangeData,
 }: WalletDropDownProps) {
   const randomId: number = Math.floor(Math.random() * 1000);
@@ -49,12 +50,14 @@ function WalletDropDownSimple({
 
   const handleSelected = (item: WalletDropdownMenuData) => {
     setSelected(item);
+    onChange && onChange(item);
 
     setIsOpen(false);
     setFilteredData(data.filter((d) => d.value !== item.value));
   };
 
   useEffect(() => {
+    onChangeData && onChangeData(data, setSelected);
     if (value && !selected) {
       const selectedDistrict = data.find((item) => item.value === value);
       setSelected(selectedDistrict);
@@ -84,7 +87,7 @@ function WalletDropDownSimple({
       <div
         className={`w-full ${
           isOpen ? 'rounded-t-3xl' : 'rounded-3xl'
-        } bg-[#4E1724] flex px-6 py-6 items-center justify-between gap-3 cursor-pointer`}
+        } bg-[#4E1724] flex px-6 h-[91px] items-center justify-between gap-3 cursor-pointer`}
         onClick={() => setIsOpen(!isOpen)}
       >
         <div className="flex gap-2 items-center">
