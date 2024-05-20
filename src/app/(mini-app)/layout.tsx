@@ -15,7 +15,7 @@ export default function BaseLayout({
     <TonConnectUIProvider manifestUrl={manifestUrl}>
       <div className="bg-city bg-cover bg-center bg-no-repeat h-screen w-100 ">
         <div
-          className="w-base mx-auto pt-4 h-screen"
+          className="w-[396px] mx-auto pt-4 h-screen"
         >
           <GlobalContextProvider>{children}</GlobalContextProvider>
         </div>
