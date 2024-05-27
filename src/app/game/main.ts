@@ -9,8 +9,13 @@ const config: Phaser.Types.Core.GameConfig = {
   scale: {
     mode: Phaser.Scale.FIT,
     autoCenter: Phaser.Scale.CENTER_BOTH,
+    min: {
+      width: 1080,
+      height: 720,
+    },
   },
   scene: [PrayScene],
+  transparent: true,
 };
 
 const StartGame = (parent: string) => {

@@ -6,6 +6,8 @@ import TweenEffect from './TweenEffect';
 import StoneGameObject from './StoneObject';
 
 export default class PrayScene extends Phaser.Scene {
+  public nav_font_size = '12px';
+
   private bg: Phaser.GameObjects.Image | undefined;
 
   private angle: Phaser.GameObjects.Image | undefined;
@@ -26,15 +28,13 @@ export default class PrayScene extends Phaser.Scene {
 
   private main_font: Phaser.Loader.LoaderPlugin | undefined;
 
-  public nav_font_size = '12px';
-
-  private upgrade_popup:UpgradePopup | undefined;
+  private upgrade_popup: UpgradePopup | undefined;
 
   constructor() {
     super('hello-world');
-        
+
   }
-    
+
   preload() {
     this.main_font = this.load.script('webfont', 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js');
     this.load_sound_effect();
@@ -42,17 +42,17 @@ export default class PrayScene extends Phaser.Scene {
     //load image main
     WebFont.load({
       google: {
-        families: [ 'Mochiy Pop One'],
+        families: ['Mochiy Pop One'],
       },
       active: function () {
         console.log('font loaded');
       },
     });
-        
+
   }
-    
+
   load_images() {
-    this.load.image('btn_upgrade', 'assets/upgrade/btn_upgrade.png');    
+    this.load.image('btn_upgrade', 'assets/upgrade/btn_upgrade.png');
     this.load.image('upgrade_item', 'assets/upgrade/upgrade_item.png');
     this.load.image('bg', 'assets/prayscene/bg.png');
     this.load.image('angle', 'assets/prayscene/angle.png');
@@ -85,28 +85,32 @@ export default class PrayScene extends Phaser.Scene {
     //load image stone 
     this.load.image('red1', 'assets/stones/red1.png');
   }
-    
+
   load_sound_effect() {
     this.load.audio('hover_button_sound', 'sounds/MI_SFX37.mp3');
     this.load.audio('click_button_sound', 'sounds/MI_SFX45.mp3');
     this.load.audio('show_sound', 'sounds/MI_SFX30.mp3');
   }
-    
+
   create() {
-        
-    this.hover_sound = this.sound.add('hover_button_sound', { volume: 0.05 });    
+
+    this.hover_sound = this.sound.add('hover_button_sound', { volume: 0.05 });
     this.click_sound = this.sound.add('click_button_sound', { volume: 0.05 });
     this.show_sound = this.sound.add('show_sound');
     const w_mid_point = this.game.canvas.width / 2;
     const h_mid_point = this.game.canvas.height / 2;
-    this.bg = this.add.image(w_mid_point, h_mid_point, 'bg')
-      .setOrigin(0.5, 0.5);
-    this.bg.displayWidth = this.game.canvas.width;
-    this.bg.displayHeight = this.game.canvas.height;
+    // this.bg = this.add.image(w_mid_point, h_mid_point, 'bg')
+    //   .setOrigin(0.5, 0.5);
+    // this.bg.displayWidth = this.game.canvas.width;
+    // this.bg.displayHeight = this.game.canvas.height;
     this.angle = this.add.image(w_mid_point, h_mid_point - 60, 'angle').setOrigin(0.5, 0.5).setScale(0.5);
     this.container_btn_pray = this.add.container(this.angle.x, this.angle.y + this.angle.height * 0.7 / 2 - 165);
     const btn_pray = this.add.image(0, 0, 'btn_pray').setOrigin(0.5, 0.5).setScale(0.5);
-    const text = this.add.text(btn_pray.x, btn_pray.y, 'Pray', { fontFamily: 'Mochiy Pop One', fontSize: '20px', color: '#ffffff' }).setOrigin(0.5, 0.5);
+    const text = this.add.text(btn_pray.x, btn_pray.y, 'Pray', {
+      fontFamily: 'Mochiy Pop One',
+      fontSize: '20px',
+      color: '#ffffff',
+    }).setOrigin(0.5, 0.5);
     this.container_btn_pray.add(btn_pray);
     this.container_btn_pray.add(text);
     const interactive_zone = new Phaser.Geom.Rectangle(0, 0, btn_pray.width * btn_pray.scaleX, btn_pray.height * btn_pray.scaleY);
@@ -118,7 +122,11 @@ export default class PrayScene extends Phaser.Scene {
     this.container_btn_pray.on('pointerdown', () => this.pray_action());
     const border_progress_pray_point = this.add.image(this.container_btn_pray.x, this.container_btn_pray.y + btn_pray.height * 0.5 / 2 + 5, 'border_progress_pray_point').setOrigin(0.5, 0.5).setScale(0.5);
     const progress_regenerate = this.add.image(border_progress_pray_point.x - border_progress_pray_point.width * border_progress_pray_point.scaleX / 2, border_progress_pray_point.y, 'exp_progress').setOrigin(0, 0.5).setScale(0, 1);
-    const text_timer = this.add.text(border_progress_pray_point.x, border_progress_pray_point.y, '00:00', { fontFamily: 'Mochiy Pop One', fontSize: '10px', color: '#ffffff' }).setOrigin(0.5, 0.5);
+    const text_timer = this.add.text(border_progress_pray_point.x, border_progress_pray_point.y, '00:00', {
+      fontFamily: 'Mochiy Pop One',
+      fontSize: '10px',
+      color: '#ffffff',
+    }).setOrigin(0.5, 0.5);
     this.create_animation_progress(progress_regenerate, text_timer, 0.555, 60000, (value) => {
       const minutes = Math.floor((value * 0.555) * 60);
       const seconds = Math.floor(((value * 0.555) * 60 - minutes) * 60);
@@ -134,11 +142,11 @@ export default class PrayScene extends Phaser.Scene {
     this.popup_out_spray.hide();
   }
 
-  create_bottom_menu() : Phaser.GameObjects.Container {
-        
+  create_bottom_menu(): Phaser.GameObjects.Container {
+
     const container = this.add.container(this.game.canvas.width / 2, this.game.canvas.height - 235);
     this.bg_bootmenu = this.add.image(this.game.canvas.width / 2, this.game.canvas.height - 235, 'bg_bootmenu').setOrigin(0.5, 0.5).setScale(0.5);
-    const spacex = this.bg_bootmenu.width / 6; 
+    const spacex = this.bg_bootmenu.width / 6;
     const y_padding = 60;
     const spacey = (this.bg_bootmenu.height - y_padding) / 6;
     const center_pos = this.bg_bootmenu.x;
@@ -161,15 +169,35 @@ export default class PrayScene extends Phaser.Scene {
     const item_center_y = this.bg_nav.x - y_item_offset;
     const item_center_x = this.bg_nav.x;
     const ic_character = this.add.image(item_center_x + (-2 * item_space), item_center_y, 'ic_character').setOrigin(0.5, 0).setScale(0.5);
-    const text_character = this.add.text(ic_character.x, ic_character.y + 60, 'Character', { fontFamily: 'Mochiy Pop One', fontSize: this.nav_font_size, color: '#ffffff' }).setOrigin(0.5, 0.5);
+    const text_character = this.add.text(ic_character.x, ic_character.y + 60, 'Character', {
+      fontFamily: 'Mochiy Pop One',
+      fontSize: this.nav_font_size,
+      color: '#ffffff',
+    }).setOrigin(0.5, 0.5);
     const ic_upgrade = this.add.image(item_center_x + (-1 * item_space), item_center_y, 'ic_upgrade').setOrigin(0.5, 0).setScale(0.5);
-    const text_upgrade = this.add.text(ic_upgrade.x, ic_upgrade.y + 60, 'Upgrade', { fontFamily: 'Mochiy Pop One', fontSize: this.nav_font_size, color: '#ffffff' }).setOrigin(0.5, 0.5);
+    const text_upgrade = this.add.text(ic_upgrade.x, ic_upgrade.y + 60, 'Upgrade', {
+      fontFamily: 'Mochiy Pop One',
+      fontSize: this.nav_font_size,
+      color: '#ffffff',
+    }).setOrigin(0.5, 0.5);
     const ic_battle = this.add.image(item_center_x + (0 * item_space), item_center_y, 'ic_battle').setOrigin(0.5, 0).setScale(0.5);
-    const text_battle = this.add.text(ic_battle.x, ic_battle.y + 60, 'Battle', { fontFamily: 'Mochiy Pop One', fontSize: this.nav_font_size, color: '#ffffff' }).setOrigin(0.5, 0.5);
+    const text_battle = this.add.text(ic_battle.x, ic_battle.y + 60, 'Battle', {
+      fontFamily: 'Mochiy Pop One',
+      fontSize: this.nav_font_size,
+      color: '#ffffff',
+    }).setOrigin(0.5, 0.5);
     const ic_pray = this.add.image(item_center_x + (1 * item_space), item_center_y, 'ic_pray').setOrigin(0.5, 0).setScale(0.5);
-    const text_pray = this.add.text(ic_pray.x, ic_pray.y + 60, 'Pray', { fontFamily: 'Mochiy Pop One', fontSize: this.nav_font_size, color: '#ffffff' }).setOrigin(0.5, 0.5);
+    const text_pray = this.add.text(ic_pray.x, ic_pray.y + 60, 'Pray', {
+      fontFamily: 'Mochiy Pop One',
+      fontSize: this.nav_font_size,
+      color: '#ffffff',
+    }).setOrigin(0.5, 0.5);
     const ic_market = this.add.image(item_center_x + (2 * item_space), item_center_y, 'ic_market').setOrigin(0.5, 0).setScale(0.5);
-    const text_market = this.add.text(ic_market.x, ic_market.y + 60, 'Market', { fontFamily: 'Mochiy Pop One', fontSize: this.nav_font_size, color: '#ffffff' }).setOrigin(0.5, 0.5);
+    const text_market = this.add.text(ic_market.x, ic_market.y + 60, 'Market', {
+      fontFamily: 'Mochiy Pop One',
+      fontSize: this.nav_font_size,
+      color: '#ffffff',
+    }).setOrigin(0.5, 0.5);
     const list_button = [ic_battle, ic_pray, ic_market, ic_upgrade, ic_character];
     for (let i = 0; i < list_button.length; i++) {
       TweenEffect.add_hover_effect(this, list_button[i], this.hover_sound!, 0.5, 0.6);
@@ -198,7 +226,11 @@ export default class PrayScene extends Phaser.Scene {
     container.add(exp_border);
     const avatar = this.add.image(bg_top_bar.x - bg_top_bar.width / 2, bg_top_bar.y + y_item_offset, 'avatar').setOrigin(0.5, 0);
     const exp_progress = this.add.image(-exp_border.width / 2, bg_top_bar.y + y_exp_offset + 11, 'exp_progress').setOrigin(0, 0.5).setScale(0, 2);
-    const text_exp = this.add.text(exp_border.x, exp_border.y + 10, '0/100', { fontFamily: 'Mochiy Pop One', fontSize: '12px', color: '#ffffff' }).setOrigin(0.5, 0.5);
+    const text_exp = this.add.text(exp_border.x, exp_border.y + 10, '0/100', {
+      fontFamily: 'Mochiy Pop One',
+      fontSize: '12px',
+      color: '#ffffff',
+    }).setOrigin(0.5, 0.5);
     //exp_progress.displayWidth *= 2
     const max = 80;
     this.create_animation_progress(exp_progress, text_exp, 2, 10000, (value) => {
@@ -207,9 +239,9 @@ export default class PrayScene extends Phaser.Scene {
     container.add(exp_progress);
     container.add(text_exp);
     container.add(avatar);
-  }   
+  }
 
-  create_animation_progress(exp_progress: Phaser.GameObjects.Image, text: Phaser.GameObjects.Text, max_scale, duration, callback: (value:number) => void) {
+  create_animation_progress(exp_progress: Phaser.GameObjects.Image, text: Phaser.GameObjects.Text, max_scale, duration, callback: (value: number) => void) {
     const originalWidth = exp_progress.scaleX; // Save the original width
     const max = 80;
     const value = { val: 0 }; // Object to tween        
@@ -249,7 +281,7 @@ export default class PrayScene extends Phaser.Scene {
     this.click_sound?.play();
     this.upgrade_popup?.show();
   }
-    
+
   button_character_onclick() {
     this.click_sound?.play();
     console.log('Character action');

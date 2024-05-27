@@ -10,7 +10,7 @@ export default function GameContentPage() {
     setCanMoveSprite(scene.scene.key !== 'MainMenu');
 
   };
-  return <div className="h-screen">
+  return <div className="h-screen bg-[url('/assets/prayscene/bg.png')] bg-cover bg-center">
     <PhaserGame ref={phaserRef} currentActiveScene={currentScene}/>
   </div>;
 }

@@ -64,7 +64,7 @@ export const PhaserGame = forwardRef<IRefPhaserGame, IProps>(function PhaserGame
   }, [currentActiveScene, ref]);
 
   return (
-    <div id="game-container"></div>
+    <div className="!overflow-y-scroll !overflow-x-hidden " id="game-container"></div>
   );
 
 });
