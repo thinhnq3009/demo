@@ -1,8 +1,8 @@
 'use client';
 
-import {createRef, InputHTMLAttributes, KeyboardEventHandler, useContext, useState} from 'react';
+import { createRef, InputHTMLAttributes, KeyboardEventHandler, useContext, useState } from 'react';
 import classNames from 'classnames';
-import {HomeContext} from '@/components/context/home/HomeContextProvider';
+import { HomeContext } from '@/components/context/home/HomeContextProvider';
 import apiChat from '@/apis/chatApi';
 
 type InputChatProps = InputHTMLAttributes<HTMLInputElement> & {
@@ -10,7 +10,7 @@ type InputChatProps = InputHTMLAttributes<HTMLInputElement> & {
   classNameInput?: string;
 };
 
-export default function InputChat({className, classNameInput, ...passProp}: InputChatProps) {
+export default function InputChat({ className, classNameInput, ...passProp }: InputChatProps) {
 
   const {
     messageResponse: [messageResponse, setMessageResponse],
@@ -21,7 +21,7 @@ export default function InputChat({className, classNameInput, ...passProp}: Inpu
   const inputRef = createRef<HTMLInputElement>();
 
   // API
-  const {getResponse} = apiChat();
+  const { getResponse } = apiChat();
 
   const handleSendMessage = () => {
     if (sending) return;

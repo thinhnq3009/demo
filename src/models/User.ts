@@ -6,4 +6,4 @@ export type User = {
   ref_code: number
   level: number
   experience: number
-}
+};

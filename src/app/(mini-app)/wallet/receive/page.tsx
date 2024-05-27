@@ -1,8 +1,8 @@
-"use client";
-import { FaChevronRight } from "react-icons/fa";
-import Image from "next/image";
-import WalletHeader from "@/components/common/header/Wallet";
-import { useTonAddress } from "@tonconnect/ui-react";
+'use client';
+import { FaChevronRight } from 'react-icons/fa';
+import Image from 'next/image';
+import WalletHeader from '@/components/common/header/Wallet';
+import { useTonAddress } from '@tonconnect/ui-react';
 
 export default function ReceiveWalletPage() {
   const walletAddress = useTonAddress();
@@ -15,7 +15,7 @@ export default function ReceiveWalletPage() {
           <p className="text-base text-[#FFFFFF] font-mochi ">
             {walletAddress
               ? `${walletAddress.slice(0, 8)}...${walletAddress.slice(-8)}`
-              : "Wallet Address"}
+              : 'Wallet Address'}
           </p>
         </div>
         <p className="text-base text-[#EF831F] font-mochi ">Copy</p>
@@ -45,7 +45,7 @@ interface WalletMethodsProps {
 const WalletMethods: React.FC<WalletMethodsProps> = ({ img, text }) => (
   <div className="w-full rounded-2xl bg-[#4E1724] flex px-2 h-[91px] items-center justify-between gap-3">
     <div className="flex items-center gap-3">
-      <Image width={24} height={24} src={img} alt={""} />
+      <Image width={24} height={24} src={img} alt={''} />
       <p className="text-lg text-[#FFFFFF] font-mina font-bold">{text}</p>
     </div>
     <FaChevronRight className="w-7 h-7 text-[#FFFFFF]" />

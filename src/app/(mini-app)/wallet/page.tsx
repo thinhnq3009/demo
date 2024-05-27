@@ -1,19 +1,19 @@
-"use client";
-import { FaArrowDown, FaArrowUp, FaPlus, FaRegCopy } from "react-icons/fa";
-import { MdOutlineSwapVert } from "react-icons/md";
-import Image from "next/image";
-import Link from "next/link";
-import WalletHeader from "@/components/common/header/Wallet";
-import { useState } from "react";
-import WalletBalancePage from "./balance";
-import { useTonAddress } from "@tonconnect/ui-react";
+'use client';
+import { FaArrowDown, FaArrowUp, FaPlus, FaRegCopy } from 'react-icons/fa';
+import { MdOutlineSwapVert } from 'react-icons/md';
+import Image from 'next/image';
+import Link from 'next/link';
+import WalletHeader from '@/components/common/header/Wallet';
+import { useState } from 'react';
+import WalletBalancePage from './balance';
+import { useTonAddress } from '@tonconnect/ui-react';
 
 export default function WalletPage() {
-  const [selectedAsset, setSelectedAsset] = useState("");
-  const [selectedSrcImg, setSelectedSrcImg] = useState("");
+  const [selectedAsset, setSelectedAsset] = useState('');
+  const [selectedSrcImg, setSelectedSrcImg] = useState('');
   const walletAddress = useTonAddress();
   const closeBalance = () => {
-    setSelectedAsset("");
+    setSelectedAsset('');
   };
   return (
     <main className="flex flex-col px-2 h-full gap-2 ">
@@ -36,7 +36,7 @@ export default function WalletPage() {
               <p className="text-xs text-[#FFFFFF] font-mochi text-center ">
                 {walletAddress
                   ? `${walletAddress.slice(0, 5)}...${walletAddress.slice(-5)}`
-                  : "Wallet Address"}
+                  : 'Wallet Address'}
               </p>
 
               <FaRegCopy className="copy-icon cursor-pointer w-4 h-4 text-[#d6975d]" />
@@ -54,16 +54,16 @@ export default function WalletPage() {
             <div
               className=" w-full rounded-2xl bg-[#4E1724] flex px-6 h-[93px]  justify-between items-center gap-3"
               onClick={() => {
-                setSelectedAsset("$NUD");
-                setSelectedSrcImg("nud");
+                setSelectedAsset('$NUD');
+                setSelectedSrcImg('nud');
               }}
             >
               <div className="items-start gap-2 flex ">
                 <Image
                   width={24}
                   height={24}
-                  src={"/assets/item/nud.svg"}
-                  alt={"Coin"}
+                  src={'/assets/item/nud.svg'}
+                  alt={'Coin'}
                 />
                 <div className=" w-auto flex-grow flex flex-col justify-center ">
                   <p className=" text-lg text-[#FFFFFF] font-mochi">$NUD</p>
@@ -76,17 +76,17 @@ export default function WalletPage() {
             <div
               className="w-full rounded-2xl bg-[#4E1724] flex px-6 h-[93px] items-center justify-between gap-3"
               onClick={() => {
-                setSelectedAsset("TonCoin");
-                setSelectedSrcImg("ton");
+                setSelectedAsset('TonCoin');
+                setSelectedSrcImg('ton');
               }}
             >
               <div className="items-start gap-2 flex ">
-                {" "}
+                {' '}
                 <Image
                   width={24}
                   height={24}
-                  src={"/assets/item/ton.svg"}
-                  alt={"Coin"}
+                  src={'/assets/item/ton.svg'}
+                  alt={'Coin'}
                 />
                 <div className=" w-auto flex-grow flex flex-col justify-center ">
                   <p className=" text-lg text-[#FFFFFF] font-mochi">TonCoin</p>
@@ -104,8 +104,8 @@ export default function WalletPage() {
             <Image
               width={207}
               height={140}
-              src={"/assets/avatar/dog.png"}
-              alt={"dog"}
+              src={'/assets/avatar/dog.png'}
+              alt={'dog'}
             />
             <p className="flex text-lg text-[#9F4C4C] font-mochi justify-center text-center">
               There is no transaction history yet
