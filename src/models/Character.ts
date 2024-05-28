@@ -9,6 +9,7 @@ export type Character = {
   code: string
   root_character_id: string
   name: string
+  url_model: string
 };
 
 
