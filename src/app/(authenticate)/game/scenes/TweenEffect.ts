@@ -4,7 +4,7 @@ export default class TweenEffect {
         
   }
 
-  public static fadeOut(scene: Phaser.Scene, object: Phaser.GameObjects.Container, sound: Phaser.Sound.BaseSound, duration: number, delay: number) {
+  public static fadeOut(scene: Phaser.Scene, object: Phaser.GameObjects.Container, sound:Phaser.Sound.BaseSound, duration: number, delay: number) {
     scene.tweens.add({
       targets: object,
       alpha: 0,
@@ -22,7 +22,7 @@ export default class TweenEffect {
     }, delay);
   }
 
-  public static fadeIn(scene: Phaser.Scene, object: Phaser.GameObjects.Container, sound: Phaser.Sound.BaseSound, duration: number) {
+  public static fadeIn(scene: Phaser.Scene, object: Phaser.GameObjects.Container, sound:Phaser.Sound.BaseSound, duration: number) {       
     scene.tweens.add({
       targets: object,
       alpha: 1,
@@ -38,7 +38,7 @@ export default class TweenEffect {
     });
   }
 
-  public static add_hover_effect(scene: Phaser.Scene, item: Phaser.GameObjects.GameObject, hover_sound: Phaser.Sound.BaseSound, scalefrom, scaleto) {
+  public static add_hover_effect(scene: Phaser.Scene, item: Phaser.GameObjects.GameObject, hover_sound:Phaser.Sound.BaseSound, scalefrom, scaleto) {
     item.on('pointerover', () => {
       scene.tweens.add({
         targets: item,

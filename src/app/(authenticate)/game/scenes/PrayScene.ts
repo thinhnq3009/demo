@@ -1,9 +1,14 @@
 import Phaser from 'phaser';
-import WebFont from 'webfontloader';
-import UpgradePopup from './Popup_Upgrade';
-import OutOfPrayPopup from './Popup_Out_Of';
+import UpgradePopup from './View/Popup_Upgrade';
+import OutOfPrayPopup from './View/Popup_Out_Of';
 import TweenEffect from './TweenEffect';
-import StoneGameObject from './StoneObject';
+import StoneGameObject from './View/StoneObject';
+import WebFont from 'webfontloader';
+import MyUltils from './Utils';
+import StatGameObject from './View/StatGameObject';
+import UserData from '@/app/(authenticate)/game/data/user_data';
+import Global from '@/app/(authenticate)/game/data/Global';
+import StoneData from '@/app/(authenticate)/game/data/stone_data';
 
 export default class PrayScene extends Phaser.Scene {
   public nav_font_size = '12px';
@@ -29,6 +34,8 @@ export default class PrayScene extends Phaser.Scene {
   private main_font: Phaser.Loader.LoaderPlugin | undefined;
 
   private upgrade_popup: UpgradePopup | undefined;
+
+  private arr_stone_data_object: Array<StoneGameObject> = new Array<StoneGameObject>();
 
   constructor() {
     super('hello-world');
@@ -84,6 +91,14 @@ export default class PrayScene extends Phaser.Scene {
     this.load.image('upgrade_item', 'assets/upgrade/upgrade_item.png');
     //load image stone 
     this.load.image('red1', 'assets/stones/red1.png');
+    this.load.image('red2', 'assets/stones/red2.png');
+    this.load.image('red3', 'assets/stones/red3.png');
+    this.load.image('yellow1', 'assets/stones/yellow1.png');
+    this.load.image('yellow2', 'assets/stones/yellow2.png');
+    this.load.image('yellow3', 'assets/stones/yellow3.png');
+    this.load.image('green1', 'assets/stones/green1.png');
+    this.load.image('green2', 'assets/stones/green2.png');
+    this.load.image('green3', 'assets/stones/green3.png');
   }
 
   load_sound_effect() {
@@ -93,16 +108,17 @@ export default class PrayScene extends Phaser.Scene {
   }
 
   create() {
-
     this.hover_sound = this.sound.add('hover_button_sound', { volume: 0.05 });
     this.click_sound = this.sound.add('click_button_sound', { volume: 0.05 });
     this.show_sound = this.sound.add('show_sound');
+    //init user data here
+    this.init_user_data();
     const w_mid_point = this.game.canvas.width / 2;
     const h_mid_point = this.game.canvas.height / 2;
-    // this.bg = this.add.image(w_mid_point, h_mid_point, 'bg')
-    //   .setOrigin(0.5, 0.5);
-    // this.bg.displayWidth = this.game.canvas.width;
-    // this.bg.displayHeight = this.game.canvas.height;
+    this.bg = this.add.image(w_mid_point, h_mid_point, 'bg')
+      .setOrigin(0.5, 0.5);
+    this.bg.displayWidth = this.game.canvas.width;
+    this.bg.displayHeight = this.game.canvas.height;
     this.angle = this.add.image(w_mid_point, h_mid_point - 60, 'angle').setOrigin(0.5, 0.5).setScale(0.5);
     this.container_btn_pray = this.add.container(this.angle.x, this.angle.y + this.angle.height * 0.7 / 2 - 165);
     const btn_pray = this.add.image(0, 0, 'btn_pray').setOrigin(0.5, 0.5).setScale(0.5);
@@ -135,11 +151,63 @@ export default class PrayScene extends Phaser.Scene {
     this.create_top_bar();
     this.create_nav_bar();
     this.upgrade_popup = new UpgradePopup(this, this.game.canvas.width / 2, this.game.canvas.height / 2);
+    this.load_stat_data();
     this.create_bottom_menu();
+
     //this.upgrade_popup?.hide()
     //this.upgrade_popup.hide()
     this.popup_out_spray = new OutOfPrayPopup(this, this.game.canvas.width / 4, this.game.canvas.height / 4);
-    this.popup_out_spray.hide();
+    this.popup_out_spray.hide_no_animation();
+  }
+
+  init_user_data() {
+    // load api here, replace null by api data
+    Global.userData = UserData.init_user_data(null);
+  }
+
+  load_stat_data() {
+    // load api here
+    const json_array = this.upgrade_popup?.create_example();
+    //
+    const list_stat_object = this.upgrade_popup?.load_stat_data(json_array) as Array<StatGameObject>;
+    this.upgrade_popup?.init_stat_data_toview(list_stat_object);
+  }
+
+  load_stone_data() {
+    //load api here
+    const json_example = MyUltils.example_init_stone_data();
+    const data = JSON.parse(json_example);
+    //
+    this.arr_stone_data_object = this.load_stone_data_toview(data);
+  }
+
+  update_stone_data() {
+    //load api here
+    const json_example = MyUltils.example_init_stone_data();
+    const data = JSON.parse(json_example);
+    const arr_StoneData: Array<StoneData> = StoneData.convert_json_to_StoneData(data);
+    //
+    for (let i = 0; i < this.arr_stone_data_object.length; i++) {
+      this.arr_stone_data_object[i].update_value(arr_StoneData.pop()!.value);
+    }
+  }
+
+  load_stone_data_toview(json_example): Array<StoneGameObject> {
+    const spacex = this.bg_bootmenu!.width / 6;
+    const y_padding = 60;
+    const spacey = (this.bg_bootmenu!.height - y_padding) / 6;
+    const center_pos = this.bg_bootmenu!.x;
+    const array_list_holer = new Array<StoneGameObject>();
+    const arr_StoneData: Array<StoneData> = StoneData.convert_json_to_StoneData(json_example);
+    arr_StoneData.reverse();
+    for (let i = -1; i < 2; i++) {
+      for (let j = -1; j < 2; j++) {
+        const item_bg = this.add.image(center_pos + (i * spacex), this.bg_bootmenu!.y + (j * spacey), 'item_bg').setOrigin(0.5, 0.5);
+        const test = new StoneGameObject(this, center_pos + (i * spacex), this.bg_bootmenu!.y + (j * spacey), arr_StoneData.pop()!);
+        array_list_holer.push(test);
+      }
+    }
+    return array_list_holer;
   }
 
   create_bottom_menu(): Phaser.GameObjects.Container {
@@ -151,13 +219,17 @@ export default class PrayScene extends Phaser.Scene {
     const spacey = (this.bg_bootmenu.height - y_padding) / 6;
     const center_pos = this.bg_bootmenu.x;
     const array_list_holer = new Array<StoneGameObject>();
-    for (let i = -1; i < 2; i++) {
-      for (let j = -1; j < 2; j++) {
-        const item_bg = this.add.image(center_pos + (i * spacex), this.bg_bootmenu.y + (j * spacey), 'item_bg').setOrigin(0.5, 0.5);
-        const test = new StoneGameObject(this, center_pos + (i * spacex), this.bg_bootmenu.y + (j * spacey), 'red1', 10);
-        array_list_holer.push(test);
-      }
-    }
+    this.load_stone_data();
+    /// init json stone data here
+    // const arr_StoneData: Array<StoneData> = MyUltils.convert_json_to_StoneData(json_example)
+    // arr_StoneData.reverse()
+    // for (let i = -1; i < 2; i++) {
+    //     for (let j = -1; j < 2; j++) {
+    //         const item_bg = this.add.image(center_pos + (i*spacex), this.bg_bootmenu.y + (j * spacey), 'item_bg').setOrigin(0.5, 0.5)
+    //         const test = new StoneGameObject(this, center_pos + (i*spacex), this.bg_bootmenu.y + (j * spacey), arr_StoneData.pop()!)
+    //         array_list_holer.push(test)
+    //     }
+    // }
     return container;
   }
 
@@ -212,7 +284,6 @@ export default class PrayScene extends Phaser.Scene {
     ic_battle.setInteractive({ useHandCursor: true });
     ic_pray.setInteractive({ useHandCursor: true });
     ic_market.setInteractive({ useHandCursor: true });
-    //this.popup_out_spray = this.create_popup_out_of_pray_point()
   }
 
   create_top_bar() {
@@ -240,6 +311,7 @@ export default class PrayScene extends Phaser.Scene {
     container.add(text_exp);
     container.add(avatar);
   }
+
 
   create_animation_progress(exp_progress: Phaser.GameObjects.Image, text: Phaser.GameObjects.Text, max_scale, duration, callback: (value: number) => void) {
     const originalWidth = exp_progress.scaleX; // Save the original width
@@ -279,6 +351,8 @@ export default class PrayScene extends Phaser.Scene {
 
   button_upgrade_onclick() {
     this.click_sound?.play();
+    if (this.upgrade_popup?.is_showing())
+      return;
     this.upgrade_popup?.show();
   }
 

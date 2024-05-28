@@ -1,5 +1,5 @@
 import Phaser, { NONE } from 'phaser';
-import Stat from '@/app/game/data/stat';
+import Stat from '@/app/(authenticate)/game/data/stat';
 
 export default class StatGameObject extends Phaser.GameObjects.Container {
   // Add properties for the stats of the object
@@ -31,6 +31,7 @@ export default class StatGameObject extends Phaser.GameObjects.Container {
       stroke: '#8B661E',
       strokeThickness: 1,
     }).setOrigin(0.5, 0);
+    text_value.name = 'text_stat_value';
     this.add(text_value);
     const txt_upgrade = scene.add.text(text_value.x + 30, text_value.y, '(+1)', {
       fontFamily: 'Mochiy Pop One',
@@ -56,6 +57,12 @@ export default class StatGameObject extends Phaser.GameObjects.Container {
     txt_upgrade.visible = false;
     // Add the object to the scene
     this.scene.add.existing(this);
+  }
+
+  update_stat(stat: Stat) {
+    this.stat = stat;
+    const text_value = this.getByName('text_stat_value') as Phaser.GameObjects.Text;
+    text_value.text = stat.value.toString();
   }
 
   upgrade_status(percent: number) {

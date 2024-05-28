@@ -3,3 +3,9 @@ export enum StatType {
   DEFENSE = 'defense',
   ENERGY = 'energy',
 }
+
+export enum StoneType {
+  YELLOW = 'yellow',
+  RED = 'red',
+  GREEN = 'green',
+}

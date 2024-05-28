@@ -1,4 +1,4 @@
-import TweenEffect from './TweenEffect';
+import TweenEffect from '../TweenEffect';
 
 export default class CustomButton extends Phaser.GameObjects.Container {
 

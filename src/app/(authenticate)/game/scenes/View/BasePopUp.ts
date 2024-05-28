@@ -1,4 +1,4 @@
-import TweenEffect from './TweenEffect';
+import TweenEffect from '../TweenEffect';
 
 export default class BasePopup extends Phaser.GameObjects.Container {
   protected center_x: number;
@@ -35,6 +35,13 @@ export default class BasePopup extends Phaser.GameObjects.Container {
   hide() {
     if (this.main_container)
       TweenEffect.fadeOut(this.scene, this.main_container, this.sound_display!, 1000, 1000);
+    else
+      console.error('main_container is not defined');
+  }
+
+  hide_no_animation() {
+    if (this.main_container)
+      this.main_container.visible = false;
     else
       console.error('main_container is not defined');
   }
