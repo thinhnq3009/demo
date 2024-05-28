@@ -2,15 +2,18 @@
 
 import { createContext, Dispatch, ReactNode, SetStateAction, useEffect, useState } from 'react';
 import { User } from '@/models/User';
-import { useSearchParams } from 'next/navigation';
 import { useApi } from '@/apis/useApi';
+import { Character } from '@/models/Character';
 
 type GlobalContextType = {
   loggedUser: [User | undefined, Dispatch<SetStateAction<User | undefined>>]
+  character: [Character[], Dispatch<SetStateAction<Character[]>>]
 };
 
 export const GlobalContext = createContext<GlobalContextType>({
   loggedUser: [undefined, () => {
+  }],
+  character: [[], () => {
   }],
 });
 
@@ -19,18 +22,19 @@ export default function GlobalContextProvider({ children }: {
 }) {
   // Show status for xs screen
   const loggedUserState = useState<User | undefined>();
+  const characterState = useState<Character[]>([]);
 
   // Load user info
-  const { getUserInfoByToken } = useApi();
-  const param = useSearchParams();
+  const { authenticateMe, getCharacter } = useApi();
 
 
   useEffect(() => {
-    const token = param.get('token');
-    if (!token) return;
-    getUserInfoByToken(token)
+    authenticateMe()
       .then(response => {
         loggedUserState[1](response);
+        getCharacter().then(res => {
+
+        });
       })
       .catch(err => {
         console.error(err);
@@ -41,6 +45,7 @@ export default function GlobalContextProvider({ children }: {
 
   const value: GlobalContextType = {
     loggedUser: loggedUserState,
+    character: characterState,
   };
 
   return <GlobalContext.Provider value={value}>{children}</GlobalContext.Provider>;

@@ -36,8 +36,8 @@ const refreshAccessToken = async () => {
   return accessToken;
 };
 axiosClient.interceptors.request.use(async (config) => {
-  const token = localStorage.getItem('accessToken');
-
+  let token = sessionStorage.getItem('accessToken');
+  token = JSON.parse(token);
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }

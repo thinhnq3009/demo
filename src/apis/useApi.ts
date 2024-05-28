@@ -18,8 +18,12 @@ export const useApi = () => {
       const res = await axiosClient.get<any, Character[]>('/characters');
       return res.map((c) => {
         const part = c.name.toLowerCase().split(' ').join('_');
-        return { ...c, url: `/assets/models/${part}.glb` };
+        c.url_model = `/assets/models/${part}.glb`;
+        return c;
       });
+    },
+    authenticateMe: () => {
+      return axiosClient.get<any, User>('/auth/me');
     },
   };
 };
