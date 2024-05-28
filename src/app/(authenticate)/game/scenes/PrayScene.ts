@@ -7,8 +7,8 @@ import WebFont from 'webfontloader';
 import MyUltils from './Utils';
 import StatGameObject from './View/StatGameObject';
 import UserData from '@/app/(authenticate)/game/data/user_data';
-import Global from '@/app/(authenticate)/game/data/Global';
 import StoneData from '@/app/(authenticate)/game/data/stone_data';
+import Global from '~/data/Global';
 
 export default class PrayScene extends Phaser.Scene {
   public nav_font_size = '12px';
