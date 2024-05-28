@@ -25,6 +25,7 @@
   },
   "rules": {
     "import/no-extraneous-dependencies": "off",
-    "@typescript-eslint/naming-convention": "off"
+    "@typescript-eslint/naming-convention": "off",
+    "@typescript-eslint/no-explicit-any": "off"
   }
 }
