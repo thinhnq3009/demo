@@ -46,23 +46,24 @@ export default function ModelPreview({ modelUrl, active }: CharacterProps) {
   //   return true;
   // }
   // return <>ModelPreview</>;
+  if (!modelUrl) return;
   return <Canvas>
-        <ambientLight intensity={2}/>
-        <pointLight position={[10, 10, 10]}/>
-        <spotLight position={[0, -10, 0]}/>
-        <Suspense fallback={<Loading />}>
-            <Character active={active} modelUrl={modelUrl}/>
-            <Environment preset="sunset"/>
-            <OrbitControls
-                scale={[10, 10, 10]}
-                enableZoom={true}
-                enablePan={true}
-                enableRotate={true}
-                minPolarAngle={router}
-                maxPolarAngle={router}
-                onUpdate={self => console.log(self)}/>
-        </Suspense>
-    </Canvas>;
+    <ambientLight intensity={2}/>
+    <pointLight position={[10, 10, 10]}/>
+    <spotLight position={[0, -10, 0]}/>
+    <Suspense fallback={<Loading/>}>
+      <Character active={active} modelUrl={modelUrl}/>
+      <Environment preset="sunset"/>
+      <OrbitControls
+        scale={[10, 10, 10]}
+        enableZoom={true}
+        enablePan={true}
+        enableRotate={true}
+        minPolarAngle={router}
+        maxPolarAngle={router}
+        onUpdate={self => console.log(self)}/>
+    </Suspense>
+  </Canvas>;
 
 }
 

@@ -33,7 +33,7 @@ export default function GlobalContextProvider({ children }: {
       .then(response => {
         loggedUserState[1](response);
         getCharacter().then(res => {
-
+          characterState[1](res);
         });
       })
       .catch(err => {
