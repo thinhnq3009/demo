@@ -31,7 +31,10 @@ import { GlobalContext } from '@/components/context/GlobalContextProvider';
 export default function HomePage() {
 
   // Context
-  const { character: [character] } = useContext(GlobalContext);
+  const {
+    character: [character],
+    selectedIndex: [activeIndex, setActiveIndex],
+  } = useContext(GlobalContext);
 
   // Memo
   const models = useMemo<string[]>(() => {
@@ -41,7 +44,7 @@ export default function HomePage() {
   console.log(models);
 
   // // State
-  const [activeIndex, setActiveIndex] = useState(0);
+  // const [activeIndex, setActiveIndex] = useState(0);
   const [loadedModels, setLoadedModels] = useState<(JSX.Element | null)[]>(Array(models.length).fill(null));
 
   const handleSlideChange = (index: number) => {
@@ -108,7 +111,7 @@ export default function HomePage() {
         <div className="mb-2 w-full flex justify-center">
           <ButtonImageSquare size='md' image="\assets\item\play-item.svg"
                              className="bg-[#2B0940] bg-[url('/assets/rect/btn-left-play.svg')]"></ButtonImageSquare>
-          <ButtonImageArrow size='lg'>Play</ButtonImageArrow>
+          <Link href={'/game'}><ButtonImageArrow size='lg'>Play</ButtonImageArrow></Link>
           <ButtonImageSquare size='md' image="\assets\item\play-item.svg"
                              className="bg-[#2B0940] bg-[url('/assets/rect/btn-right-play.svg')]"></ButtonImageSquare>
         </div>

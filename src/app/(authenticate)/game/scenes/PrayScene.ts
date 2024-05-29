@@ -9,6 +9,7 @@ import StatGameObject from './View/StatGameObject';
 import UserData from '@/app/(authenticate)/game/data/user_data';
 import StoneData from '@/app/(authenticate)/game/data/stone_data';
 import Global from '~/data/Global';
+import { userApi } from '@/apis/userApi';
 
 export default class PrayScene extends Phaser.Scene {
   public nav_font_size = '12px';
@@ -39,7 +40,6 @@ export default class PrayScene extends Phaser.Scene {
 
   constructor() {
     super('hello-world');
-
   }
 
   preload() {
@@ -55,7 +55,7 @@ export default class PrayScene extends Phaser.Scene {
         console.log('font loaded');
       },
     });
-
+    this.init_user_data();
   }
 
   load_images() {
@@ -162,7 +162,18 @@ export default class PrayScene extends Phaser.Scene {
 
   init_user_data() {
     // load api here, replace null by api data
-    Global.userData = UserData.init_user_data(null);
+    const { authenticateMe } = userApi();
+    authenticateMe()
+      .then(response => {
+        // Call API user Success
+        Global.userData = UserData.init_user_data(response);
+      })
+      .catch(error => {
+        console.log(error);
+        //TODO Call API user Fail
+      }).finally()
+    ;
+    // Global.userData = UserData.init_user_data(null);
   }
 
   load_stat_data() {

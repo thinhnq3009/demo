@@ -3,13 +3,16 @@ import { User } from '@/models/User';
 import { Stone } from '@/models/Stone';
 import { Character } from '@/models/Character';
 
-export const useApi = () => {
+export const userApi = () => {
   return {
     getUserInfoByToken: (token: string) => {
       return axiosClient.get<any, User>('/users', { params: { token } });
     },
     pray: () => {
-      return axiosClient.post<any, Stone[]>('/pray');
+      return axiosClient.post<any, {
+        stones: Stone[],
+        result: Stone,
+      }>('/pray');
     },
     getBagStone: () => {
       return axiosClient.get<any, Stone[]>('/users/bag');

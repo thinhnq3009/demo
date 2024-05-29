@@ -1,4 +1,6 @@
 import StoneData from './stone_data';
+import { User } from '@/models/User';
+import { sortStone, stoneToStoneDataMapper } from '@/models/Stone';
 
 export default class UserData {
   public _id: string;
@@ -31,66 +33,77 @@ export default class UserData {
     this.photo_url = photo_url;
     this.experience = experience;
     this.ref_code = ref_code;
-    this.stone_data = stone_data;
+    this.stone_data = sortStone(stone_data);
     const rs = this.calculate_level(experience);
     this.level = rs.level;
     this.reminder = rs.remainder;
     this.next_exp = this.calculate_experience(this.level + 1);
+    console.log(this.stone_data);
   }
 
-  public static init_user_data(json_object): UserData {
-    if (json_object == null) {
-      const example_json = JSON.stringify({
-        '_id': '5f5f7d1a4c3f0d0017c5b9b4',
-        'tele_id': 123456789,
-        'username': 'test',
-        'full_name': 'test',
-        'photo_url': 'https://www.google.com',
-        'experience': 200,
-        'ref_code': 0,
-        'stone_data': [{
-          'type': 'red',
-          'level': 1,
-          'value': 10,
-        }, {
-          'type': 'red',
-          'level': 2,
-          'value': 10,
-        }, {
-          'type': 'red',
-          'level': 3,
-          'value': 10,
-        }, {
-          'type': 'yellow',
-          'level': 1,
-          'value': 20,
-        }, {
-          'type': 'yellow',
-          'level': 2,
-          'value': 20,
-        }, {
-          'type': 'yellow',
-          'level': 3,
-          'value': 20,
-        }, {
-          'type': 'green',
-          'level': 1,
-          'value': 30,
-        }, {
-          'type': 'green',
-          'level': 2,
-          'value': 30,
-        }, {
-          'type': 'green',
-          'level': 3,
-          'value': 30,
-        }],
-      });
-
-      json_object = JSON.parse(example_json);
-    }
-    const arr_StoneData = StoneData.convert_json_to_StoneData(json_object.stone_data);
-    const user_data = new UserData(json_object._id, json_object.tele_id, json_object.username, json_object.full_name, json_object.photo_url, json_object.experience, json_object.ref_code, arr_StoneData);
+  public static init_user_data(json_object: User): UserData {
+    // if (json_object == null) {
+    //   const example_json = JSON.stringify({
+    //     '_id': '5f5f7d1a4c3f0d0017c5b9b4',
+    //     'tele_id': 123456789,
+    //     'username': 'test',
+    //     'full_name': 'test',
+    //     'photo_url': 'https://www.google.com',
+    //     'experience': 200,
+    //     'ref_code': 0,
+    //     'stone_data': [{
+    //       'type': 'red',
+    //       'level': 1,
+    //       'value': 10,
+    //     }, {
+    //       'type': 'red',
+    //       'level': 2,
+    //       'value': 10,
+    //     }, {
+    //       'type': 'red',
+    //       'level': 3,
+    //       'value': 10,
+    //     }, {
+    //       'type': 'yellow',
+    //       'level': 1,
+    //       'value': 20,
+    //     }, {
+    //       'type': 'yellow',
+    //       'level': 2,
+    //       'value': 20,
+    //     }, {
+    //       'type': 'yellow',
+    //       'level': 3,
+    //       'value': 20,
+    //     }, {
+    //       'type': 'green',
+    //       'level': 1,
+    //       'value': 30,
+    //     }, {
+    //       'type': 'green',
+    //       'level': 2,
+    //       'value': 30,
+    //     }, {
+    //       'type': 'green',
+    //       'level': 3,
+    //       'value': 30,
+    //     }],
+    //   });
+    //
+    //   json_object = JSON.parse(example_json);
+    // }
+    // const arr_StoneData = StoneData.convert_json_to_StoneData(json_object.stone_data);
+    // const user_data = new UserData(json_object._id, json_object.tele_id, json_object.username, json_object.full_name, json_object.photo_url, json_object.experience, json_object.ref_code, arr_StoneData);
+    const user_data = new UserData(
+      json_object._id,
+      json_object.tele_id,
+      json_object.username,
+      json_object.full_name,
+      json_object.photo_url,
+      json_object.experience,
+      json_object.ref_code,
+      json_object.stones.map(stoneToStoneDataMapper),
+    );
     console.log('user_data', user_data);
     return user_data;
   }
