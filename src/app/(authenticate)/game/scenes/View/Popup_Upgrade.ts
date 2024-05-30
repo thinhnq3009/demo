@@ -103,8 +103,12 @@ export default class UpgradePopup extends BasePopup {
     const type = string_type.slice(0, -1);
     const lastChar = string_type[string_type.length - 1];
     const stone_data = Global.userData.stone_data;
+    console.log('stone_data', stone_data);
     stone_data.forEach(element => {
+
+      console.log(element.stone_type, type, element.level, parseInt(lastChar));
       if (element.stone_type == type && element.level == parseInt(lastChar)) {
+        console.log('change text');
         this.update_text_value(element.value);
         this.current_max = element.value;
         this.current_select_stone = element;

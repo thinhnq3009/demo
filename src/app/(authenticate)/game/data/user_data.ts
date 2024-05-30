@@ -116,8 +116,8 @@ export default class UserData extends EventEmitter {
   }
 
   update_user_data(json_object: UserData) {
-    const arr_StoneData = StoneData.convert_json_to_StoneData(json_object.stone_data);
-    console.log('json_object', arr_StoneData);
+    // const arr_StoneData = StoneData.convert_json_to_StoneData(json_object.stone_data);
+    // console.log('json_object', arr_StoneData);
     this._id = json_object._id;
     this.tele_id = json_object.tele_id;
     this.username = json_object.username;
@@ -126,7 +126,7 @@ export default class UserData extends EventEmitter {
     this.experience = json_object.experience;
     this.ref_code = json_object.ref_code;
     this.pray_points = json_object.pray_points;
-    this.stone_data = arr_StoneData;
+    this.stone_data = json_object.stone_data;
     const rs = this.calculate_level(this.experience);
     this.level = rs.level;
     this.reminder = rs.remainder;

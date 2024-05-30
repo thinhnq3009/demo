@@ -23,7 +23,7 @@ export default class NFTData extends EventEmitter {
 
   public stats: Array<Stat> = new Array<Stat>();
 
-  constructor(attack:number, defense:number, energy:number, _id:string, owner_id:string, code:string, root_character_id:string, name:string, url_model:string) {
+  constructor(attack: number, defense: number, energy: number, _id: string, owner_id: string, code: string, root_character_id: string, name: string, url_model: string) {
     super();
     this.attack = attack;
     this.defense = defense;
@@ -38,6 +38,25 @@ export default class NFTData extends EventEmitter {
     this.stats.push(new Stat(StatType.ATTACK, attack));
     this.stats.push(new Stat(StatType.DEFENSE, defense));
     this.stats.push(new Stat(StatType.ENERGY, energy));
+  }
+
+  public static convert_json_to_NFTData(data): NFTData {
+    const json_example = JSON.stringify({
+      'attack': 10,
+      'defense': 15,
+      'energy': 20,
+      '_id': '5f5f7d1a4c3f0d0017c5b9b4',
+      'owner_id': '5f5f7d1a4c3f0d0017c5b9b3',
+      'code': '5f5f7d1a4c3f0d0017c5b9b2',
+      'root_character_id': '5f5f7d1a4c3f0d0017c5b9b1',
+      'name': 'test',
+      'url_model': 'test',
+    });
+    if (data == null) {
+      data = JSON.parse(json_example);
+    }
+    const nft = new NFTData(data.attack, data.defense, data.energy, data._id, data.owner_id, data.code, data.root_character_id, data.name, data.url_model);
+    return nft;
   }
 
   public update_NFT_data(data) {
@@ -70,22 +89,27 @@ export default class NFTData extends EventEmitter {
     this.emit('update_NFT_data');
   }
 
-  public static convert_json_to_NFTData(data) : NFTData {
-    const json_example = JSON.stringify({
-      'attack': 10,
-      'defense': 15,
-      'energy': 20,
-      '_id': '5f5f7d1a4c3f0d0017c5b9b4',
-      'owner_id': '5f5f7d1a4c3f0d0017c5b9b3',
-      'code': '5f5f7d1a4c3f0d0017c5b9b2',
-      'root_character_id': '5f5f7d1a4c3f0d0017c5b9b1',
-      'name': 'test',
-      'url_model': 'test',
-    });
-    if (data == null) {
-      data = JSON.parse(json_example);
+  load_nft_data_local_storage() {
+    const json_str = localStorage.getItem('character');
+
+    if (!json_str) {
+      return;
     }
-    const nft = new NFTData(data.attack, data.defense, data.energy, data._id, data.owner_id, data.code, data.root_character_id, data.name, data.url_model);
-    return nft;
+
+    const data = JSON.parse(json_str);
+    console.log(data);
+    this._id = data?._id;
+    this.attack = data.attack;
+    this.defense = data.defense;
+    this.energy = data.energy;
+    this.owner_id = data.owner_id;
+    this.code = data.code;
+    this.root_character_id = data.root_character_id;
+    this.name = data.name;
+    this.url_model = data.url_model;
+    this.stats[0].value = data.attack;
+    this.stats[1].value = data.defense;
+    this.stats[2].value = data.energy;
+    this.emit('update_NFT_data');
   }
 }

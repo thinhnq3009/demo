@@ -225,6 +225,7 @@ export default class PrayScene extends Phaser.Scene {
     Global.userData = UserData.input_user_data(null);
     Global.userData.on('update_user_data', () => this.update_view_when_data_change());
     Global.nftData = NFTData.convert_json_to_NFTData(null);
+    Global.nftData.on('update_NFT_data', () => this.upgrade_popup?.update_view_when_NFT_data_change());
     ApiHandler.handleLoadUserData(this);
   }
 

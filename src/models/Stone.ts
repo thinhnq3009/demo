@@ -37,12 +37,14 @@ export function sortStone(stones: StoneData[]): StoneData[] {
     'level': 3,
   }];
 
-  return template.map((templateStone) => {
+  const result = template.map((templateStone) => {
     const stoneData = stones.find((stone) => {
       return stone.stone_type === templateStone.type && stone.level === templateStone.level;
     });
+    console.log('aaaaaa');
     return stoneData ? stoneData : new StoneData(templateStone.type, templateStone.level, 0);
   });
+  return result;
 
 }
 
