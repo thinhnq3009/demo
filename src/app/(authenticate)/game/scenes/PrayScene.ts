@@ -11,6 +11,7 @@ import SuccessFailPopup from './View/Success_Fail_Popup';
 import ApiHandler from '~/scenes/ApiHandler';
 import UserData from '~/data/user_data';
 import NFTData from '~/data/NFT_data';
+import { userApi } from '@/apis/userApi';
 
 export default class PrayScene extends Phaser.Scene {
   public nav_font_size = '12px';
@@ -134,6 +135,10 @@ export default class PrayScene extends Phaser.Scene {
     this.sound.add('main_sound', { volume: 0.1, loop: true }).play();
     //init user data here
     this.init_user_data();
+    this.init_view();
+  }
+
+  init_view() {
     const w_mid_point = this.game.canvas.width / 2;
     const h_mid_point = this.game.canvas.height / 2;
     this.bg = this.add.image(w_mid_point, h_mid_point, 'bg')
@@ -194,13 +199,14 @@ export default class PrayScene extends Phaser.Scene {
   }
 
   upgrade_button_listener() {
-    if (this.popup_success_fail?.is_showing())
-      return;
-    if (Math.random() < 0.5) {
-      this.popup_success_fail!.show_win(true);
-    } else {
-      this.popup_success_fail!.show_win(false);
-    }
+    userApi();
+    // if (this.popup_success_fail?.is_showing())
+    //   return;
+    // if (Math.random() < 0.5) {
+    //   this.popup_success_fail!.show_win(true);
+    // } else {
+    //   this.popup_success_fail!.show_win(false);
+    // }
   }
 
   update_praypoint_data() {
@@ -216,7 +222,7 @@ export default class PrayScene extends Phaser.Scene {
 
   init_user_data() {
     // load api here, replace null by api data
-    Global.userData = UserData.init_user_data(null);
+    Global.userData = UserData.input_user_data(null);
     Global.userData.on('update_user_data', () => this.update_view_when_data_change());
     Global.nftData = NFTData.convert_json_to_NFTData(null);
     ApiHandler.handleLoadUserData(this);
@@ -241,8 +247,9 @@ export default class PrayScene extends Phaser.Scene {
     }
     const array_list_holer = arr.slice();
     array_list_holer.reverse();
+    console.log('array_list_holer', array_list_holer);
     for (let i = 0; i < this.arr_stone_data_object.length; i++) {
-      this.arr_stone_data_object[i].update_value(array_list_holer.pop()!.value);
+      this.arr_stone_data_object[i].update_value(array_list_holer.pop()?.value);
     }
   }
 

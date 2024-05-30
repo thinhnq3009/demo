@@ -43,7 +43,7 @@ export default class UserData extends EventEmitter {
     this.next_exp = this.calculate_experience(this.level + 1);
   }
 
-  public static init_user_data(json_object): UserData {
+  public static input_user_data(json_object): UserData {
     if (json_object == null) {
       const example_json = JSON.stringify({
         '_id': '5f5f7d1a4c3f0d0017c5b9b4',

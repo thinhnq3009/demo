@@ -30,7 +30,7 @@ export default class ApiHandler {
 
   }
 
-  static handleLoadUserData(scene: PrayScene) {
+  public static handleLoadUserData(scene: PrayScene) {
     const { authenticateMe } = userApi();
     authenticateMe()
       .then(res => {

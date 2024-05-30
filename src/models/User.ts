@@ -1,4 +1,4 @@
-import { Stone, stoneToStoneDataMapper } from '@/models/Stone';
+import { sortStone, Stone, stoneToStoneDataMapper } from '@/models/Stone';
 import UserData from '~/data/user_data';
 
 export interface User {
@@ -23,6 +23,6 @@ export function userToUserDataMapper(user: User): UserData {
     user.experience,
     user.ref_code,
     user.pray_point,
-    user.stones.map(stoneToStoneDataMapper),
+    sortStone(user.stones.map(stoneToStoneDataMapper)),
   );
 }
