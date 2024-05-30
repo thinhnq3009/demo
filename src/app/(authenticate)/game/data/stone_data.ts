@@ -15,6 +15,7 @@ export default class StoneData {
     this.level = level;
     this.value = value;
     this.sprite = stone_type + level.toString();
+    console.log('stone sprite', this.sprite);
   }
 
   public static convert_json_to_StoneData(data) : Array<StoneData> {

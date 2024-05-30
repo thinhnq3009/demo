@@ -12,6 +12,7 @@ export default class CustomButton extends Phaser.GameObjects.Container {
     this.sound_click_button = scene.sound.add('click_button_sound', { volume: 0.05 });
     const button = scene.add.image(0, 0, texture).setOrigin(0.5, 0.5).setScale(0.5);
     button.setInteractive({ useHandCursor: true });
+    button.name = 'button';
     TweenEffect.add_hover_effect(scene, button, this.sound_hover_button, 0.5, 0.55);
 
     button.on('pointerdown', () => {
@@ -23,5 +24,13 @@ export default class CustomButton extends Phaser.GameObjects.Container {
     this.add(button);
     this.add(text_type);
     this.scene.add.existing(this);
+  }
+
+  add_btn_listener(callback: Function) {
+    const button = this.getByName('button') as Phaser.GameObjects.Image;
+    button.on('pointerdown', () => {
+      this.sound_click_button?.play();
+      callback();
+    });
   }
 }

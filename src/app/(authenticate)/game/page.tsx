@@ -16,8 +16,8 @@ export default function GameContentPage() {
     console.log(scene);
     setCanMoveSprite(scene.scene.key !== 'MainMenu');
   };
-
-  return <div className="h-screen bg-[url('/assets/prayscene/bg.png')] bg-cover bg-center">
-    <PhaserGame ref={phaserRef} currentActiveScene={currentScene}/>
-  </div>;
+  return <PhaserGame ref={phaserRef} currentActiveScene={currentScene}/>;
+  // return <div className="h-screen bg-[url('/assets/prayscene/bg.png')] bg-cover bg-center">
+  //   <PhaserGame ref={phaserRef} currentActiveScene={currentScene}/>
+  // </div>;
 }
