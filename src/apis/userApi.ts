@@ -12,6 +12,7 @@ export const userApi = () => {
       return axiosClient.post<any, {
         stones: Stone[],
         result: Stone,
+        pray_point: number
       }>('/pray');
     },
     getBagStone: () => {

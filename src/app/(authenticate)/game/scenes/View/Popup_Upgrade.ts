@@ -1,13 +1,10 @@
-import { StatType } from '~/data/enum_stat';
 import BasePopup from './BasePopup';
-import TweenEffect from '../TweenEffect';
 import StatGameObject from './StatGameObject';
 import Stat from '~/data/stat';
 import CustomButton from './Button';
-import { GameObjects, NONE } from 'phaser';
+import { GameObjects } from 'phaser';
 import Global from '~/data/Global';
 import StoneData from '~/data/stone_data';
-import SuccessFailPopup from './Success_Fail_Popup';
 
 export default class UpgradePopup extends BasePopup {
   // Specific properties here
@@ -15,7 +12,7 @@ export default class UpgradePopup extends BasePopup {
 
   private list_stat: Array<StatGameObject> = new Array<StatGameObject>();
 
-  private current_stat:StatGameObject | undefined;
+  private current_stat: StatGameObject | undefined;
 
   private current_max = 0;
 
@@ -37,11 +34,17 @@ export default class UpgradePopup extends BasePopup {
     const zone = this.scene.add.zone(upgrade_holder.x, upgrade_holder.y, 72, 72).setRectangleDropZone(72, 72);
     this.main_container?.add(upgrade_holder);
     const btn_upgrade = new CustomButton(this.scene, 0, 160, 'btn_upgrade', 'Upgrade', () => {
-            
+
     });
     btn_upgrade.name = 'btn_upgrade';
     const bg_value = this.scene.add.image(0, 115, 'bg_value').setOrigin(0.5, 0.5).setScale(0.5);
-    const text_value = this.scene.add.text(0, 115, '', { fontFamily: 'Mochiy Pop One', fontSize: '12px', color:'#fff', stroke: '#8B661E', strokeThickness: 1 }).setOrigin(0.5, 0.5);
+    const text_value = this.scene.add.text(0, 115, '', {
+      fontFamily: 'Mochiy Pop One',
+      fontSize: '12px',
+      color: '#fff',
+      stroke: '#8B661E',
+      strokeThickness: 1,
+    }).setOrigin(0.5, 0.5);
     text_value.name = 'text_value';
     const btn_minus = new CustomButton(this.scene, -40, 115, 'ic_minus', '', () => {
       if (text_value.text == '')
@@ -78,12 +81,12 @@ export default class UpgradePopup extends BasePopup {
     this.main_container?.add(btn_plus);
   }
 
-  set_btn_upgrade_callback(callback:Function) {
+  set_btn_upgrade_callback(callback: Function) {
     const btn_upgrade = this.main_container?.getByName('btn_upgrade') as CustomButton;
     btn_upgrade.add_btn_listener(callback);
   }
 
-  update_text_value(value:number) {
+  update_text_value(value: number) {
     const text_value = this.main_container?.getByName('text_value') as Phaser.GameObjects.Text;
     text_value.text = value.toString();
   }
@@ -96,7 +99,7 @@ export default class UpgradePopup extends BasePopup {
     });
   }
 
-  change_status(string_type:string) {
+  change_status(string_type: string) {
     const type = string_type.slice(0, -1);
     const lastChar = string_type[string_type.length - 1];
     const stone_data = Global.userData.stone_data;
@@ -117,8 +120,8 @@ export default class UpgradePopup extends BasePopup {
         (this.list_stat?.[0] as StatGameObject).set_alpha(1);
         (this.list_stat?.[0] as StatGameObject).highLight();
         (this.list_stat?.[0] as StatGameObject).upgrade_status(20);
-        (this.list_stat?.[0] as StatGameObject).update_percent_success(parseInt(lastChar), this.current_max); 
-        this.current_stat = this.list_stat?.[0] as StatGameObject;            
+        (this.list_stat?.[0] as StatGameObject).update_percent_success(parseInt(lastChar), this.current_max);
+        this.current_stat = this.list_stat?.[0] as StatGameObject;
         break;
       case 'yellow':
         (this.list_stat?.[2] as StatGameObject).set_alpha(1);
@@ -144,7 +147,7 @@ export default class UpgradePopup extends BasePopup {
     }
   }
 
-  init_stat_data_toview(object_list:Array<StatGameObject>) {
+  init_stat_data_toview(object_list: Array<StatGameObject>) {
     this.list_stat = object_list;
     const item_h = 50;
     const item_spacing = 20;
@@ -160,13 +163,13 @@ export default class UpgradePopup extends BasePopup {
       cellHeight: item_h + item_spacing,
       x: 75,
       y: -160,
-    });       
-    this.main_container?.add(grid); 
+    });
+    this.main_container?.add(grid);
   }
 
-  load_stat_data(object_list:Array<Stat>): Array<StatGameObject> {
+  load_stat_data(object_list: Array<Stat>): Array<StatGameObject> {
     const list_gameobj = new Array<StatGameObject>();
-    object_list.forEach(element => {
+    object_list?.forEach(element => {
       const gj = new StatGameObject(this.scene, 0, 0, 'upgrade_item', element);
       list_gameobj.push(gj);
       console.log('stat', gj);
@@ -194,5 +197,5 @@ export default class UpgradePopup extends BasePopup {
     const rs_image = this.main_container?.getByName('rs_image') as Phaser.GameObjects.Image;
     rs_image.setTexture('item_bg');
   }
-    
+
 }

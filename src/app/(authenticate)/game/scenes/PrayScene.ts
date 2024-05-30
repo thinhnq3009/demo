@@ -7,10 +7,10 @@ import StoneGameObject from './View/StoneObject';
 import StoneData from '~/data/stone_data';
 import StatGameObject from './View/StatGameObject';
 import Global from '~/data/Global';
-import UserData from '~/data/user_data';
-import NFTData from '~/data/NFT_data';
 import SuccessFailPopup from './View/Success_Fail_Popup';
 import ApiHandler from '~/scenes/ApiHandler';
+import UserData from '~/data/user_data';
+import NFTData from '~/data/NFT_data';
 
 export default class PrayScene extends Phaser.Scene {
   public nav_font_size = '12px';
@@ -187,9 +187,10 @@ export default class PrayScene extends Phaser.Scene {
     this.popup_success_fail = new SuccessFailPopup(this, this.game.canvas.width / 2, this.game.canvas.height / 2);
     //this.popup_success_fail!.show_win(true)
     this.upgrade_popup.set_btn_upgrade_callback(() => this.upgrade_button_listener());
-    this.time.delayedCall(5000, () => {
-      Global.userData.update_user_data(null);
-    });
+  }
+
+  enable_btn_pray(b: boolean) {
+    this.container_btn_pray?.setInteractive({ enabled: b });
   }
 
   upgrade_button_listener() {
@@ -218,6 +219,7 @@ export default class PrayScene extends Phaser.Scene {
     Global.userData = UserData.init_user_data(null);
     Global.userData.on('update_user_data', () => this.update_view_when_data_change());
     Global.nftData = NFTData.convert_json_to_NFTData(null);
+    ApiHandler.handleLoadUserData(this);
   }
 
   load_stat_data() {
@@ -234,6 +236,9 @@ export default class PrayScene extends Phaser.Scene {
 
   update_stone_data() {
     const arr = Global.userData.stone_data;
+    if (arr.length === 0) {
+      return;
+    }
     const array_list_holer = arr.slice();
     array_list_holer.reverse();
     for (let i = 0; i < this.arr_stone_data_object.length; i++) {
@@ -380,7 +385,7 @@ export default class PrayScene extends Phaser.Scene {
     const exp_progress = this.topbar_container!.getByName('exp_progress') as Phaser.GameObjects.Image;
     const originalWidth = exp_progress.scaleX;
     const value = user_data.reminder / user_data.next_exp;
-    exp_progress.scaleX = originalWidth + value;
+    exp_progress.scaleX = value;
     const text_exp = this.topbar_container!.getByName('text_exp') as Phaser.GameObjects.Text;
     text_exp.setText(`${Math.floor(user_data.reminder)}/${Math.round(user_data.next_exp)}`);
   }
