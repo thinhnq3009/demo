@@ -1,5 +1,5 @@
 import TweenEffect from '../TweenEffect';
-import BasePopup from './BasePopup';
+import BasePopup from './BasePopUp';
 
 export default class SuccessFailPopup extends BasePopup {
   create_View(): void {

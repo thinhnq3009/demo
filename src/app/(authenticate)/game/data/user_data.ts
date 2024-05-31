@@ -43,7 +43,7 @@ export default class UserData extends EventEmitter {
     this.next_exp = this.calculate_experience(this.level + 1);
   }
 
-  public static input_user_data(json_object): UserData {
+  public static input_user_data(json_object: any): UserData {
     if (json_object == null) {
       const example_json = JSON.stringify({
         '_id': '5f5f7d1a4c3f0d0017c5b9b4',
@@ -102,7 +102,7 @@ export default class UserData extends EventEmitter {
     return user_data;
   }
 
-  public update_stone_data(json_stone_data) {
+  public update_stone_data(json_stone_data: any) {
     this.stone_data = StoneData.convert_json_to_StoneData(json_stone_data);
   }
 
@@ -116,7 +116,6 @@ export default class UserData extends EventEmitter {
   }
 
   update_user_data(json_object: UserData) {
-    // const arr_StoneData = StoneData.convert_json_to_StoneData(json_object.stone_data);
     // console.log('json_object', arr_StoneData);
     this._id = json_object._id;
     this.tele_id = json_object.tele_id;

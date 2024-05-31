@@ -41,7 +41,7 @@ export default class NFTData extends EventEmitter {
     this.stats.push(new Stat(StatType.ENERGY, energy));
   }
 
-  public static convert_json_to_NFTData(data): NFTData {
+  public static convert_json_to_NFTData(data: Character): NFTData {
     const json_example = JSON.stringify({
       'attack': 10,
       'defense': 15,
