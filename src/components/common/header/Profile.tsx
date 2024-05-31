@@ -15,12 +15,15 @@ export default function Profile() {
   // className="flex gap-1.5 py-1.5 px-2 w-full h-[52px] text-white bg-[url('/assets/rect/rect-avt.svg')] bg-no-repeat">
   // <Image className="border-image-orange rounded-full" width={64} height={64} src={avatarUrl} alt={'Avatar'}/>
   return <div className='relative'>
-    <Image className="border-yellow-100 border-2 rounded-full absolute -top-1.5 left-0 z-10" width={64} height={64}
+    <Image className="border-yellow-100 border-2 rounded-full absolute -top-1.5 left-0 z-10" width={80} height={80}
            src={avatarUrl} alt={'Avatar'}/>
     <div
-      className="absolute right-0 pl-14 flex items-center gap-1.5 py-1.5 px-2 h-[52px] text-white w-[364px] bg-blue-400 bg-[url('/assets/bg/bg-infor.svg')] bg-transparent bg-no-repeat">
+      className="#absolute mb-1 pl-[86px] flex items-center gap-1.5 py-1.5 px-2 h-[52px] text-white w-[calc(100%)] bg-right bg-blue-400 bg-[url('/assets/bg/bg-infor.svg')] bg-transparent bg-no-repeat">
       {/* <div className="font-mochi text-2xs">{user?.full_name}</div> */}
-      <div className="font-mochi text-xs">{user?.full_name || 'undefined'}</div>
+      <div className='overflow-x-auto flex-1'>
+        <div className="font-mochi text-xs truncate mb-0.5">{user?.full_name || 'undefined'}</div>
+        <div className={'text-[8px]'}>lv.99</div>
+      </div>
       <div className="pl-[24px] flex flex-col justify-between">
         <div className="flex gap-2.5">
           <div className="flex items-center relative">
@@ -34,5 +37,17 @@ export default function Profile() {
         </div>
       </div>
     </div>
+    <div className="pl-[50px] pr-[90px]">
+      <div
+        className='relative rounded-2xl h-[14px] border-[1px] border-[#776244] text-[8px] text-center text-white font-mochi overflow-hidden'>
+        <div
+          className="absolute h-full top-0 left-0 bg-gradient-to-b from-[#b0e5c7] to-[#5bc476] rounded-2xl z-0"
+          style={{ width: '90%' }}>
+        </div>
+        <span className='z-50 relative'>2342/10000</span>
+      </div>
+    </div>
   </div>;
 }
+
+// background: linear-gradient(180deg, #B0E5C7 46%, #5BC476 46.76%);

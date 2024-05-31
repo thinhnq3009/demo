@@ -85,7 +85,7 @@ export default function HomePage() {
     <div className="px-1 flex flex-col h-full">
       <header className="font-mochi">
         <Profile/>
-        <div className="flex justify-between mt-[64px]">
+        <div className="flex justify-between">
           <span></span>
           <div className='flex flex-col gap-2'>
             <Link href="/wallet">
