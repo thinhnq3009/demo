@@ -100,7 +100,7 @@ export default function HomePage() {
         <ChatPopup/>
         <Carousel loop onSlideChange={handleSlideChange}>
           {models.map((model, index) => (
-            <div key={model} className="relative h-full flex-[0_0_100%]">
+            <div key={index} className="relative h-full flex-[0_0_100%]">
               {loadedModels[index]}
             </div>
           ))}
