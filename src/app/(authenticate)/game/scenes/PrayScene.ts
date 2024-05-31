@@ -11,7 +11,6 @@ import SuccessFailPopup from './View/Success_Fail_Popup';
 import ApiHandler from '~/scenes/ApiHandler';
 import UserData from '~/data/user_data';
 import NFTData from '~/data/NFT_data';
-import { userApi } from '@/apis/userApi';
 
 export default class PrayScene extends Phaser.Scene {
   public nav_font_size = '12px';
@@ -191,27 +190,24 @@ export default class PrayScene extends Phaser.Scene {
     this.popup_out_spray.hide_no_animation();
     this.popup_success_fail = new SuccessFailPopup(this, this.game.canvas.width / 2, this.game.canvas.height / 2);
     //this.popup_success_fail!.show_win(true)
-    this.upgrade_popup.set_btn_upgrade_callback(() => this.upgrade_button_listener());
+    this.upgrade_popup.set_btn_upgrade_callback((a, b, c) => ApiHandler.handleUpgradeStone(this, a, b, c));
   }
 
   enable_btn_pray(b: boolean) {
     this.container_btn_pray?.setInteractive({ enabled: b });
   }
 
-  upgrade_button_listener() {
-    userApi();
-    // if (this.popup_success_fail?.is_showing())
-    //   return;
-    // if (Math.random() < 0.5) {
-    //   this.popup_success_fail!.show_win(true);
-    // } else {
-    //   this.popup_success_fail!.show_win(false);
-    // }
+  show_result_pop_up(isSuccess: boolean) {
+    this.popup_success_fail?.show_win(isSuccess);
   }
 
   update_praypoint_data() {
     const text_praypoints = this.container_btn_pray?.getByName('text_praypoints') as Phaser.GameObjects.Text;
     text_praypoints.setText(Global.userData.pray_points.toString());
+  }
+
+  update_ratio_upgrade(string_type: string) {
+    this.upgrade_popup?.change_status(string_type);
   }
 
   update_view_when_data_change() {
@@ -227,6 +223,7 @@ export default class PrayScene extends Phaser.Scene {
     Global.nftData = NFTData.convert_json_to_NFTData(null);
     Global.nftData.on('update_NFT_data', () => this.upgrade_popup?.update_view_when_NFT_data_change());
     ApiHandler.handleLoadUserData(this);
+    ApiHandler.handleLoadCharacterData(this);
   }
 
   load_stat_data() {

@@ -5,6 +5,9 @@ import CustomButton from './Button';
 import { GameObjects } from 'phaser';
 import Global from '~/data/Global';
 import StoneData from '~/data/stone_data';
+import { StoneType } from '~/data/enum_stat';
+
+type UpgradeCallback = (type: StoneType, level: number, value: number) => void;
 
 export default class UpgradePopup extends BasePopup {
   // Specific properties here
@@ -81,9 +84,16 @@ export default class UpgradePopup extends BasePopup {
     this.main_container?.add(btn_plus);
   }
 
-  set_btn_upgrade_callback(callback: Function) {
+  set_btn_upgrade_callback(callback: UpgradeCallback) {
     const btn_upgrade = this.main_container?.getByName('btn_upgrade') as CustomButton;
-    btn_upgrade.add_btn_listener(callback);
+    btn_upgrade.add_btn_listener(() => {
+      // this.current_select_stone
+      // this.current_max
+      callback(
+        this.current_select_stone?.stone_type!,
+        this.current_select_stone?.level!,
+        parseInt((this.main_container?.getByName('text_value') as Phaser.GameObjects.Text).text));
+    });
   }
 
   update_text_value(value: number) {
@@ -104,12 +114,14 @@ export default class UpgradePopup extends BasePopup {
     const lastChar = string_type[string_type.length - 1];
     const stone_data = Global.userData.stone_data;
     console.log('stone_data', stone_data);
+    let currentValue = 0;
     stone_data.forEach(element => {
 
       console.log(element.stone_type, type, element.level, parseInt(lastChar));
       if (element.stone_type == type && element.level == parseInt(lastChar)) {
         console.log('change text');
-        this.update_text_value(element.value);
+        currentValue = +!!element.value;
+        this.update_text_value(currentValue);
         this.current_max = element.value;
         this.current_select_stone = element;
       }
@@ -124,28 +136,28 @@ export default class UpgradePopup extends BasePopup {
         (this.list_stat?.[0] as StatGameObject).set_alpha(1);
         (this.list_stat?.[0] as StatGameObject).highLight();
         (this.list_stat?.[0] as StatGameObject).upgrade_status(20);
-        (this.list_stat?.[0] as StatGameObject).update_percent_success(parseInt(lastChar), this.current_max);
+        (this.list_stat?.[0] as StatGameObject).update_percent_success(parseInt(lastChar), currentValue);
         this.current_stat = this.list_stat?.[0] as StatGameObject;
         break;
       case 'yellow':
         (this.list_stat?.[2] as StatGameObject).set_alpha(1);
         (this.list_stat?.[2] as StatGameObject).highLight();
         (this.list_stat?.[2] as StatGameObject).upgrade_status(20);
-        (this.list_stat?.[2] as StatGameObject).update_percent_success(parseInt(lastChar), this.current_max);
+        (this.list_stat?.[2] as StatGameObject).update_percent_success(parseInt(lastChar), currentValue);
         this.current_stat = this.list_stat?.[2] as StatGameObject;
         break;
       case 'green':
         (this.list_stat?.[1] as StatGameObject).set_alpha(1);
         (this.list_stat?.[1] as StatGameObject).highLight();
         (this.list_stat?.[1] as StatGameObject).upgrade_status(20);
-        (this.list_stat?.[1] as StatGameObject).update_percent_success(parseInt(lastChar), this.current_max);
+        (this.list_stat?.[1] as StatGameObject).update_percent_success(parseInt(lastChar), currentValue);
         this.current_stat = this.list_stat?.[1] as StatGameObject;
         break;
       default:
         (this.list_stat?.[0] as StatGameObject).set_alpha(1);
         (this.list_stat?.[0] as StatGameObject).highLight();
         (this.list_stat?.[0] as StatGameObject).upgrade_status(20);
-        (this.list_stat?.[0] as StatGameObject).update_percent_success(parseInt(lastChar), this.current_max);
+        (this.list_stat?.[0] as StatGameObject).update_percent_success(parseInt(lastChar), currentValue);
         this.current_stat = this.list_stat?.[0] as StatGameObject;
         break;
     }

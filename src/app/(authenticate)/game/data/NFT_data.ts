@@ -1,6 +1,7 @@
 import EventEmitter from 'phaser3-rex-plugins/plugins/utils/eventemitter/EventEmitter';
 import { StatType } from './enum_stat';
 import Stat from './stat';
+import { Character } from '@/models/Character';
 
 export default class NFTData extends EventEmitter {
   public attack: number;
@@ -59,7 +60,7 @@ export default class NFTData extends EventEmitter {
     return nft;
   }
 
-  public update_NFT_data(data) {
+  public updateCharacterData(data: Character) {
     const json_example = JSON.stringify({
       'attack': 10,
       'defense': 15,
@@ -78,30 +79,6 @@ export default class NFTData extends EventEmitter {
     this.defense = data.defense;
     this.energy = data.energy;
     this._id = data._id;
-    this.owner_id = data.owner_id;
-    this.code = data.code;
-    this.root_character_id = data.root_character_id;
-    this.name = data.name;
-    this.url_model = data.url_model;
-    this.stats[0].value = data.attack;
-    this.stats[1].value = data.defense;
-    this.stats[2].value = data.energy;
-    this.emit('update_NFT_data');
-  }
-
-  load_nft_data_local_storage() {
-    const json_str = localStorage.getItem('character');
-
-    if (!json_str) {
-      return;
-    }
-
-    const data = JSON.parse(json_str);
-    console.log(data);
-    this._id = data?._id;
-    this.attack = data.attack;
-    this.defense = data.defense;
-    this.energy = data.energy;
     this.owner_id = data.owner_id;
     this.code = data.code;
     this.root_character_id = data.root_character_id;

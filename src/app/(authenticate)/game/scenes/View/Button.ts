@@ -19,14 +19,20 @@ export default class CustomButton extends Phaser.GameObjects.Container {
       this.sound_click_button?.play();
       callback();
     });
-        
-    const text_type = scene.add.text(0, 0, text, { fontFamily: 'Mochiy Pop One', fontSize: '12px', color: '#fff', stroke: '##8B661E', strokeThickness: 1 }).setOrigin(0.5, 0.5);
+
+    const text_type = scene.add.text(0, 0, text, {
+      fontFamily: 'Mochiy Pop One',
+      fontSize: '12px',
+      color: '#fff',
+      stroke: '##8B661E',
+      strokeThickness: 1,
+    }).setOrigin(0.5, 0.5);
     this.add(button);
     this.add(text_type);
     this.scene.add.existing(this);
   }
 
-  add_btn_listener(callback: Function) {
+  add_btn_listener(callback) {
     const button = this.getByName('button') as Phaser.GameObjects.Image;
     button.on('pointerdown', () => {
       this.sound_click_button?.play();
