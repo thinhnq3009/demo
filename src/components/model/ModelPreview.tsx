@@ -56,8 +56,8 @@ export default function ModelPreview({ modelUrl, active }: CharacterProps) {
       <Environment preset="sunset"/>
       <OrbitControls
         scale={[10, 10, 10]}
-        enableZoom={true}
-        enablePan={true}
+        enableZoom={false}
+        enablePan={false}
         enableRotate={true}
         minPolarAngle={router}
         maxPolarAngle={router}
