@@ -23,9 +23,9 @@ export default class PlayGame extends Phaser.Scene {
 
   private DEFEND_STATE = 2;
 
-  private user;
+  private user: any;
 
-  private enemy;
+  private enemy: any;
 
   constructor() {
     super({
