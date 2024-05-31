@@ -258,7 +258,7 @@ export default class PlayGame extends Phaser.Scene {
       sphere.position.add(direction.multiplyScalar(0.5));
     }
 
-    function blinkModel(model, duration) {
+    function blinkModel(model: any, duration: any) {
       let isModelVisible = true;
       const blinkInterval = setInterval(() => {
         isModelVisible = !isModelVisible;
@@ -404,6 +404,7 @@ export default class PlayGame extends Phaser.Scene {
     main_container.add([bg, health_border1, health_progress1, health_border2, health_progress2]);
     const bottom_bg = this.add.image(this.game.canvas.width / 2, this.game.canvas.height * 0.83, 'bottom_bg').setOrigin(0.5, 0.5).setScale(0.5, 0.5);
 
+
     const btn_attack = new ButtonBattle(this, bottom_bg.x - btn_offset, bottom_bg.y - 80, 'btn_attack', () => {
       if (this.user.energy < 10) {
         change_State(this.DEFEND_STATE);
@@ -415,6 +416,16 @@ export default class PlayGame extends Phaser.Scene {
     const btn_defend = new ButtonBattle(this, bottom_bg.x + btn_offset, bottom_bg.y - 80, 'btn_defend', () => {
       change_State(this.DEFEND_STATE);
     });
+    const change_State = (state: number) => {
+      this.user.state = state;
+      if (state === this.ATTACK_STATE) {
+        btn_attack.onChangeState();
+        btn_defend.resetState();
+      } else {
+        btn_defend.onChangeState();
+        btn_attack.resetState();
+      }
+    };
 
     const energy_border = this.add.image(bottom_bg.x, bottom_bg.y, 'energy_border').setOrigin(0.5, 0.5).setScale(0.5, 0.5);
     const energy_progress = this.add.image(energy_border.x - energy_border.width / 4 + 3, energy_border.y, 'energy_progress').setOrigin(0, 0.5).setScale(0.5, 1);
@@ -429,16 +440,7 @@ export default class PlayGame extends Phaser.Scene {
     const btn_end = new CustomButton(this, bottom_bg.x, bottom_bg.y + btn_offset + 20, 'btn_end', '', () => {
     });
     main_container.add([bottom_bg, btn_attack, btn_defend, energy_border, energy_progress, this.text_timer, btn_end]);
-    const change_State = (state: number) => {
-      this.user.state = state;
-      if (state === this.ATTACK_STATE) {
-        btn_attack.onChangeState();
-        btn_defend.resetState();
-      } else {
-        btn_defend.onChangeState();
-        btn_attack.resetState();
-      }
-    };
+
 
     const init_data_to_view = () => {
       const energy_progress = main_container.getByName('energy_progress') as Phaser.GameObjects.Image;

@@ -395,7 +395,7 @@ export default class PrayScene extends Phaser.Scene {
     text_exp.setText(`${Math.floor(user_data.reminder)}/${Math.round(user_data.next_exp)}`);
   }
 
-  create_animation_progress(exp_progress: Phaser.GameObjects.Image, text: Phaser.GameObjects.Text, max_scale, duration, callback: (value: number) => void) {
+  create_animation_progress(exp_progress: Phaser.GameObjects.Image, text: Phaser.GameObjects.Text, max_scale: any, duration: any, callback: (value: number) => void) {
     const originalWidth = exp_progress.scaleX; // Save the original width
     const max = 80;
     const value = { val: 0 }; // Object to tween
