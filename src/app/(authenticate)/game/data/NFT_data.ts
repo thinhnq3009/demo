@@ -53,7 +53,7 @@ export default class NFTData extends EventEmitter {
       'name': 'test',
       'url_model': 'test',
     });
-    if (data == null) {
+    if (!data._id) {
       data = JSON.parse(json_example);
     }
     const nft = new NFTData(data.attack, data.defense, data.energy, data._id, data.owner_id, data.code, data.root_character_id, data.name, data.url_model);

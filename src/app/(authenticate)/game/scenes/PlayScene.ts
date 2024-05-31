@@ -12,6 +12,7 @@ import ButtonBattle from './View/Button_Battle';
 // node_modules/@types/three/examples/jsm/loaders/DRACOLoader.d.ts
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { Character } from '@/models/Character';
 
 // this class extends Scene class
 export default class PlayGame extends Phaser.Scene {
@@ -123,7 +124,7 @@ export default class PlayGame extends Phaser.Scene {
 
   create(): void {
     if (Global.nftData === undefined) {
-      Global.nftData = NFTData.convert_json_to_NFTData(null);
+      Global.nftData = NFTData.convert_json_to_NFTData({} as Character);
     }
 
     let modelsLoaded = 0;
@@ -185,12 +186,12 @@ export default class PlayGame extends Phaser.Scene {
     const loader = new GLTFLoader();
     loader.setDRACOLoader(dracoLoader);
 
-    let model1_animation_attack;
-    let model1_animation_idle;
-    let model2_animation_attack;
-    let model2_animation_idle;
-    let model1;
-    let model2;
+    let model1_animation_attack: any;
+    let model1_animation_idle: any;
+    let model2_animation_attack: any;
+    let model2_animation_idle: any;
+    let model1: any;
+    let model2: any;
     loader.load('3dmodel/kpop.gltf', (gltf) => {
       modelsLoaded++;
       model1 = gltf.scene;
@@ -238,7 +239,7 @@ export default class PlayGame extends Phaser.Scene {
       console.error(e);
 
     });
-    let sphere;
+    let sphere: any;
 
     function createSphere() {
       const geometry = new THREE.SphereGeometry(0.2, 32, 32);
