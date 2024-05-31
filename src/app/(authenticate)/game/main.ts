@@ -1,6 +1,7 @@
 import Phaser, { Game } from 'phaser';
 
 import PrayScene from './scenes/PrayScene';
+import PlayGame from './scenes/PlayScene';
 
 const config: Phaser.Types.Core.GameConfig = {
   type: Phaser.AUTO,
@@ -9,9 +10,10 @@ const config: Phaser.Types.Core.GameConfig = {
   scale: {
     mode: Phaser.Scale.FIT,
     autoCenter: Phaser.Scale.CENTER_BOTH,
-   
+
   },
-  scene: [PrayScene],
+  scene: [PrayScene,
+    PlayGame],
   transparent: true,
 };
 

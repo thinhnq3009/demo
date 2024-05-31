@@ -416,7 +416,7 @@ export default class PrayScene extends Phaser.Scene {
   button_battle_onclick() {
     this.click_sound?.play();
     console.log('Battle action');
-    this.scene.start('BattleScene');
+    this.scene.start('PlayGame');
   }
 
   button_pray_onclick() {

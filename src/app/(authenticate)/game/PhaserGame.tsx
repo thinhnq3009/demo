@@ -65,7 +65,17 @@ export const PhaserGame = forwardRef<IRefPhaserGame, IProps>(function PhaserGame
 
   return (
     // <div className="!overflow-y-scroll !overflow-x-hidden " id="game-container"></div>
-    <div id="game-container"></div>
+    <div className="w-full h-full relative">
+      <div id="game-container"></div>
+      <div id="three_canvas" style={{
+        position: 'absolute',
+        zIndex: 1000,
+        top: 0,
+        left: '50%',
+        transform: 'translateX(-50%)',
+      }}></div>
+      {/*<div id="game_canvas"></div>*/}
+    </div>
   );
 
 });
