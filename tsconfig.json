@@ -21,6 +21,10 @@
         "name": "next"
       }
     ],
+    "typeRoots": [
+      "node_modules/@types",
+      "node_module/phaser/types"
+    ],
     "paths": {
       "@/*": [
         "./src/*"

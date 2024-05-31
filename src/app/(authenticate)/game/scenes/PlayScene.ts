@@ -9,6 +9,7 @@ import CustomButton from './View/Button';
 import Global from '~/data/Global';
 import NFTData from '~/data/NFT_data';
 import ButtonBattle from './View/Button_Battle';
+// node_modules/@types/three/examples/jsm/loaders/DRACOLoader.d.ts
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
