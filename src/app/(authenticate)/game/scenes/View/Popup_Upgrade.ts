@@ -1,4 +1,4 @@
-import BasePopup from './BasePopup';
+import BasePopup from './BasePopUp';
 import StatGameObject from './StatGameObject';
 import Stat from '~/data/stat';
 import CustomButton from './Button';

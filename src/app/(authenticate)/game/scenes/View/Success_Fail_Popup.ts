@@ -1,5 +1,4 @@
-import TweenEffect from '../TweenEffect';
-import BasePopup from './BasePopup';
+import BasePopup from './BasePopUp';
 
 export default class SuccessFailPopup extends BasePopup {
   create_View(): void {
@@ -14,7 +13,7 @@ export default class SuccessFailPopup extends BasePopup {
     this.hide_no_animation();
   }
 
-  show_win(is_win:boolean) {
+  show_win(is_win: boolean) {
     const img_success = this.main_container?.getByName('img_success') as Phaser.GameObjects.Image;
     if (is_win) {
       img_success.setTexture('success');
