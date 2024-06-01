@@ -11,6 +11,8 @@ import SuccessFailPopup from './View/Success_Fail_Popup';
 import ApiHandler from '~/scenes/ApiHandler';
 import UserData from '~/data/user_data';
 import NFTData from '~/data/NFT_data';
+import {Character} from "@/models/Character";
+import BaseSound = Phaser.Sound.BaseSound;
 
 export default class PrayScene extends Phaser.Scene {
   public nav_font_size = '12px';
@@ -40,7 +42,7 @@ export default class PrayScene extends Phaser.Scene {
 
   private main_font: Phaser.Loader.LoaderPlugin | undefined;
 
-  private hover_sound: Phaser.Sound.BaseSound | undefined;
+  private hover_sound: Phaser.Sound.BaseSound ;
 
   private click_sound: Phaser.Sound.BaseSound | undefined;
 
@@ -49,6 +51,7 @@ export default class PrayScene extends Phaser.Scene {
 
   constructor() {
     super('PrayScene');
+    this.hover_sound = {} as BaseSound
   }
 
   preload() {
@@ -220,7 +223,7 @@ export default class PrayScene extends Phaser.Scene {
     // load api here, replace null by api data
     Global.userData = UserData.input_user_data(null);
     Global.userData.on('update_user_data', () => this.update_view_when_data_change());
-    Global.nftData = NFTData.convert_json_to_NFTData(null);
+    Global.nftData = NFTData.convert_json_to_NFTData({} as Character);
     Global.nftData.on('update_NFT_data', () => this.upgrade_popup?.update_view_when_NFT_data_change());
     ApiHandler.handleLoadUserData(this);
     ApiHandler.handleLoadCharacterData(this);
@@ -247,7 +250,7 @@ export default class PrayScene extends Phaser.Scene {
     array_list_holer.reverse();
     console.log('array_list_holer', array_list_holer);
     for (let i = 0; i < this.arr_stone_data_object.length; i++) {
-      this.arr_stone_data_object[i].update_value(array_list_holer.pop()?.value);
+      this.arr_stone_data_object[i].update_value(array_list_holer.pop()?.value || 1);
     }
   }
 

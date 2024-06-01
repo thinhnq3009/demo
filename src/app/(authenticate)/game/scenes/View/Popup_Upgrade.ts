@@ -68,7 +68,7 @@ export default class UpgradePopup extends BasePopup {
       this.update_text_value(value);
       this.current_stat?.update_percent_success(this.current_select_stone?.level!, value);
     });
-    this.scene.input.on('drop', (pointer, gameObject, dropzone) => {
+    this.scene.input.on('drop', (pointer: any, gameObject: any, dropzone: any) => {
       if (dropzone) {
         rs_image.setTexture(gameObject.texture.key);
         this.change_status(gameObject.texture.key);
