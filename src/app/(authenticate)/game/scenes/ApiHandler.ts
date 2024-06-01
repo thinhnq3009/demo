@@ -8,6 +8,14 @@ import StoneData from '~/data/stone_data';
 import { StoneType } from '~/data/enum_stat';
 
 export default class ApiHandler {
+
+  public static showLoading(show: boolean) {
+    const doc = document.getElementById('loading');
+    if (doc) {
+      doc.style.display = show ? 'block' : 'none';
+    }
+  }
+
   public static handlePray(scene: PrayScene) {
     const { pray } = userApi();
     scene.enable_btn_pray(false);

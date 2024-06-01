@@ -109,12 +109,14 @@ export default function HomePage() {
       </main>
       <section className="text-center w-full">
         {/*<InputChat className="mb-2 mx-auto" placeholder={'Start typing ...'}/>*/}
-        <div className="mb-2 w-full flex justify-center">
+        <div className="mb-2 w-full flex justify-between">
           <ButtonImageSquare size='md' image="\assets\item\play-item.svg"
-                             className="bg-[#2B0940] bg-[url('/assets/rect/btn-left-play.svg')]"></ButtonImageSquare>
-          <Link href={'/game'}><ButtonImageArrow size='lg'>Play</ButtonImageArrow></Link>
+                             className="shrink bg-contain bg-[#2B0940] bg-[url('/assets/rect/btn-left-play.svg')]"></ButtonImageSquare>
+          <Link className={'flex-1'} href={'/game'}>
+            <ButtonImageArrow className={'!w-full bg-contain'} size='lg'>Play</ButtonImageArrow>
+          </Link>
           <ButtonImageSquare size='md' image="\assets\item\play-item.svg"
-                             className="bg-[#2B0940] bg-[url('/assets/rect/btn-right-play.svg')]"></ButtonImageSquare>
+                             className="shrink bg-contain bg-[#2B0940] bg-[url('/assets/rect/btn-right-play.svg')]"></ButtonImageSquare>
         </div>
         {/*<div className="flex gap-1.5 mb-6 justify-center">*/}
         {/*  <ButtonImageArrow>For $NUD</ButtonImageArrow>*/}

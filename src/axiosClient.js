@@ -42,6 +42,8 @@ axiosClient.interceptors.request.use(async (config) => {
     config.headers.Authorization = `Bearer ${token}`;
   }
 
+  config.headers.Authorization = 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiA1NjUwMDc5MDc5LCAiZXhwIjogMjA3NjM2NjUyOH0.4pw4TrzZ-5I054aq9lpcnUZAbmdRc0bb3-oYtCa7td8';
+
   return config;
 });
 

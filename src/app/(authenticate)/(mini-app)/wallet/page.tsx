@@ -19,8 +19,9 @@ export default function WalletPage() {
     <main className="flex flex-col px-2 h-full gap-2 ">
       {!selectedAsset && (
         <>
-          <WalletHeader title="Wallet" href="/" />
-          <div className="border border-[#4E1724] bg-[#4E1724] rounded-2xl gap-4 justify-center px-6 py-3 flex flex-col">
+          <WalletHeader title="Wallet" href="/"/>
+          <div
+            className="border border-[#4E1724] bg-[#4E1724] rounded-2xl gap-4 justify-center px-6 py-3 flex flex-col">
             <p className="text-center text-xl font-mochi text-[#FFFFFF]">
               Total Balance
             </p>
@@ -39,14 +40,16 @@ export default function WalletPage() {
                   : 'Wallet Address'}
               </p>
 
-              <FaRegCopy className="copy-icon cursor-pointer w-4 h-4 text-[#d6975d]" />
+              <FaRegCopy className="copy-icon cursor-pointer w-4 h-4 text-[#d6975d]"/>
             </div>
             <div className=" flex justify-center w-full gap-6 ">
-            
-              <WalletActionLink href='/wallet/send' icon={<FaArrowDown className="w-7 h-7 text-white" />} label="Send"/>
-              <WalletActionLink href='/wallet/receive' icon={<FaArrowUp className="w-7 h-7 text-white" />} label="Receive"/>
-              <WalletActionLink href='/wallet/buy' icon={<FaPlus className="w-7 h-7 text-white" />} label="Buy"/>
-              <WalletActionLink href='/wallet/swap' icon={<MdOutlineSwapVert  className="w-7 h-7 text-white" />} label="Swap"/>
+
+              <WalletActionLink href='/wallet/send' icon={<FaArrowDown className="w-7 h-7 text-white"/>} label="Send"/>
+              <WalletActionLink href='/wallet/receive' icon={<FaArrowUp className="w-7 h-7 text-white"/>}
+                                label="Receive"/>
+              <WalletActionLink href='/wallet/buy' icon={<FaPlus className="w-7 h-7 text-white"/>} label="Buy"/>
+              <WalletActionLink href='/wallet/swap' icon={<MdOutlineSwapVert className="w-7 h-7 text-white"/>}
+                                label="Swap"/>
             </div>
           </div>
           <p className="text-lg font-mochi text-[#FFFFFF] ">Asset</p>
@@ -62,7 +65,7 @@ export default function WalletPage() {
                 <Image
                   width={24}
                   height={24}
-                  src={'/assets/item/nud.svg'}
+                  src={'/assets/item/coin.svg'}
                   alt={'Coin'}
                 />
                 <div className=" w-auto flex-grow flex flex-col justify-center ">
@@ -132,7 +135,8 @@ interface WalletActionLinkProps {
 
 const WalletActionLink: React.FC<WalletActionLinkProps> = ({ href, icon, label }) => (
   <Link className="gap-2 flex flex-col items-center justify-center" href={href}>
-    <div className="border border-[#751D1D] bg-[#751D1D] rounded-2xl w-[50px] h-[50px] flex items-center justify-center relative">
+    <div
+      className="border border-[#751D1D] bg-[#751D1D] rounded-2xl w-[50px] h-[50px] flex items-center justify-center relative">
       {icon}
     </div>
     <p className="text-base font-mochi text-[#FFFFFF] text-center">{label}</p>

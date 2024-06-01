@@ -11,7 +11,7 @@ function MenuItem({ className, text }: { className: string, text: string }) {
 }
 
 export default function GameMenu() {
-  return <div className="w-[430px] h-[82px] bg-[url('/assets/bottom_menu/nav_bg.png')] bg-no-repeat bg-bottom">
+  return <div className="max-w-[430px] h-[82px] bg-[url('/assets/bottom_menu/nav_bg.png')] bg-no-repeat bg-bottom">
     <div className="w-full flex justify-around items-center">
       <MenuItem className="bg-[url('/assets/icon/ic_character.png')]" text={'Hero'}/>
       <MenuItem className="bg-[url('/assets/icon/ic_upgrade.png')]" text={'Upgrade'}/>

@@ -227,6 +227,15 @@ export default class PrayScene extends Phaser.Scene {
     Global.nftData.on('update_NFT_data', () => this.upgrade_popup?.update_view_when_NFT_data_change());
     ApiHandler.handleLoadUserData(this);
     ApiHandler.handleLoadCharacterData(this);
+    // ApiHandler.showLoading(true);
+    // Promise.resolve(async () => {
+    //   await ApiHandler.handleLoadUserData(this);
+    //   ApiHandler.handleLoadCharacterData(this);
+    //   return true;
+    // }).then(() => {
+    //   ApiHandler.showLoading(false);
+    // },
+    // );
   }
 
   load_stat_data() {
@@ -444,7 +453,7 @@ export default class PrayScene extends Phaser.Scene {
 
   button_character_onclick() {
     this.click_sound?.play();
-    console.log('Character action');
+    window.location.href = '/';
   }
 
   show_out_of_spray_popup() {

@@ -18,22 +18,20 @@ export default function Profile() {
     <Image className="border-yellow-100 border-2 rounded-full absolute -top-1.5 left-0 z-10" width={80} height={80}
            src={avatarUrl} alt={'Avatar'}/>
     <div
-      className="#absolute mb-1 pl-[86px] flex items-center gap-1.5 py-1.5 px-2 h-[52px] text-white w-[calc(100%)] bg-right bg-blue-400 bg-[url('/assets/bg/bg-infor.svg')] bg-transparent bg-no-repeat">
+      className="ml-[40px] mb-1 pl-[46px] flex items-center gap-1.5 py-1.5 px-2 h-[52px] text-white w-[calc(100%-40px)] bg-right bg-blue-400 bg-[url('/assets/bg/bg-infor.svg')] bg-transparent bg-no-repeat">
       {/* <div className="font-mochi text-2xs">{user?.full_name}</div> */}
       <div className='overflow-x-auto flex-1'>
         <div className="font-mochi text-xs truncate mb-0.5">{user?.full_name || 'undefined'}</div>
         <div className={'text-[8px]'}>lv.99</div>
       </div>
-      <div className="pl-[24px] flex flex-col justify-between">
-        <div className="flex gap-2.5">
-          <div className="flex items-center relative">
-            <Image width={36} height={36} className='absolute -left-2' src={'/assets/item/coin.svg'} alt={'Coin'}/>
-            <span className="text-xs rounded-xl bg-gray-700 w-[90px] h-[24px] pl-8 flex items-center">{100}</span>
-          </div>
-          <div className="flex gap-0.5 items-center relative">
-            <Image width={36} height={36} className='absolute -left-2' src={'/assets/item/ton.svg'} alt={'Coin'}/>
-            <span className="text-xs rounded-xl bg-gray-700 w-[90px] h-[24px] pl-8 flex items-center">{100}</span>
-          </div>
+      <div className="min-w-[170px] pl-[24px] flex gap-2.5">
+        <div className="flex-1 flex items-center relative">
+          <Image width={36} height={36} className='absolute -left-2' src={'/assets/item/coin.svg'} alt={'Coin'}/>
+          <span className="text-xs rounded-xl bg-gray-700 w-full h-[24px] pl-8 flex items-center">{100}</span>
+        </div>
+        <div className="flex-1 flex gap-0.5 items-center relative">
+          <Image width={36} height={36} className='absolute -left-2' src={'/assets/item/ton.svg'} alt={'Coin'}/>
+          <span className="text-xs rounded-xl bg-gray-700 w-full h-[24px] pl-8 flex items-center">{100}</span>
         </div>
       </div>
     </div>
