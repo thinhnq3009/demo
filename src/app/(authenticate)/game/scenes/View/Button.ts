@@ -33,7 +33,7 @@ export default class CustomButton extends Phaser.GameObjects.Container {
     this.scene.add.existing(this);
   }
 
-  add_btn_listener(callback) {
+  add_btn_listener(callback: CallableFunction) {
     const button = this.getByName('button') as Phaser.GameObjects.Image;
     button.on('pointerdown', () => {
       this.sound_click_button?.play();

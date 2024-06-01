@@ -9,18 +9,18 @@ export default class DraggableObject extends Phaser.GameObjects.Image {
     this.setInteractive();
     scene.input.setDraggable(this);
     const origin_position = { x:x, y:y };
-    scene.input.on('dragstart', function (pointer, gameObject) {
+    scene.input.on('dragstart', function (pointer: any, gameObject: any) {
       //this.children.bringToTop(gameObject);
       console.log('dragstart');
 
     }, scene);
 
-    scene.input.on('drag', function (pointer, gameObject, dragX, dragY) {
+    scene.input.on('drag', function (pointer: any, gameObject: any, dragX: any, dragY: any) {
       gameObject.x = dragX;
       gameObject.y = dragY;
     });
 
-    scene.input.on('dragend', function (pointer, gameObject, dropped) {
+    scene.input.on('dragend', function (pointer: any, gameObject: any, dropped: any) {
       gameObject.x = origin_position.x;
       gameObject.y = origin_position.y;
     });
