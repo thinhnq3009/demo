@@ -10,7 +10,7 @@ export default class StoneData {
 
   public sprite: string;
 
-  constructor(stone_type:StoneType, level:number, value:number) {
+  constructor(stone_type: StoneType, level: number, value: number) {
     this.stone_type = stone_type;
     this.level = level;
     this.value = value;
@@ -18,10 +18,11 @@ export default class StoneData {
     console.log('stone sprite', this.sprite);
   }
 
-  public static convert_json_to_StoneData(data: StoneData[]) : Array<StoneData> {
+  public static convert_json_to_StoneData(data: any[]): Array<StoneData> {
     const stone_data = new Array<StoneData>();
     for (let i = 0; i < data.length; i++) {
-      const stone = new StoneData(data[i].stone_type, data[i].level, data[i].value);
+      console.log('data', data[i]);
+      const stone = new StoneData(data[i].type, data[i].level, data[i].value);
       stone_data.push(stone);
     }
     return stone_data;

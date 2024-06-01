@@ -11,7 +11,7 @@ import SuccessFailPopup from './View/Success_Fail_Popup';
 import ApiHandler from '~/scenes/ApiHandler';
 import UserData from '~/data/user_data';
 import NFTData from '~/data/NFT_data';
-import {Character} from "@/models/Character";
+import { Character } from '@/models/Character';
 import BaseSound = Phaser.Sound.BaseSound;
 
 export default class PrayScene extends Phaser.Scene {
@@ -42,7 +42,7 @@ export default class PrayScene extends Phaser.Scene {
 
   private main_font: Phaser.Loader.LoaderPlugin | undefined;
 
-  private hover_sound: Phaser.Sound.BaseSound ;
+  private hover_sound: Phaser.Sound.BaseSound;
 
   private click_sound: Phaser.Sound.BaseSound | undefined;
 
@@ -51,7 +51,7 @@ export default class PrayScene extends Phaser.Scene {
 
   constructor() {
     super('PrayScene');
-    this.hover_sound = {} as BaseSound
+    this.hover_sound = {} as BaseSound;
   }
 
   preload() {
