@@ -42,8 +42,8 @@ export default class OutOfPrayPopup extends BasePopup {
       height: 3,
       cellWidth: 292,
       cellHeight: 61 + 12,
-      x: bg_popup_out_pray.x,
-      y: bg_popup_out_pray.y - bg_popup_out_pray.height / 2 + 95,
+      x: -143,
+      y: -90,
     });
     TweenEffect.add_hover_effect(this.scene, ic_x_cross, this.sound_hover_button!, 0.5, 0.6);
     ic_x_cross.on('pointerdown', () => {

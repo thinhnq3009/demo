@@ -41,6 +41,23 @@ export default class NFTData extends EventEmitter {
     this.stats.push(new Stat(StatType.ENERGY, energy));
   }
 
+  public static test_data(): NFTData {
+    const json_example = JSON.stringify({
+      'attack': 10,
+      'defense': 15,
+      'energy': 20,
+      '_id': '5f5f7d1a4c3f0d0017c5b9b4',
+      'owner_id': '5f5f7d1a4c3f0d0017c5b9b3',
+      'code': '5f5f7d1a4c3f0d0017c5b9b2',
+      'root_character_id': '5f5f7d1a4c3f0d0017c5b9b1',
+      'name': 'test',
+      'url_model': 'test',
+    });
+    const data = JSON.parse(json_example);
+    const nft = new NFTData(data.attack, data.defense, data.energy, data._id, data.owner_id, data.code, data.root_character_id, data.name, data.url_model);
+    return nft;
+  }
+
   public static convert_json_to_NFTData(data): NFTData {
     const json_example = JSON.stringify({
       'attack': 10,

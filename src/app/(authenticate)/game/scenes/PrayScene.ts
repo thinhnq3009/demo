@@ -138,6 +138,8 @@ export default class PrayScene extends Phaser.Scene {
   }
 
   init_view() {
+    const container = document.getElementById('three_canvas');
+    container!.innerHTML = '';
     const w_mid_point = this.game.canvas.width / 2;
     const h_mid_point = this.game.canvas.height / 2;
     this.bg = this.add.image(w_mid_point, h_mid_point, 'bg')
@@ -247,7 +249,7 @@ export default class PrayScene extends Phaser.Scene {
     array_list_holer.reverse();
     console.log('array_list_holer', array_list_holer);
     for (let i = 0; i < this.arr_stone_data_object.length; i++) {
-      this.arr_stone_data_object[i].update_value(array_list_holer.pop()?.value);
+      this.arr_stone_data_object[i].update_value(array_list_holer.pop()!.value);
     }
   }
 

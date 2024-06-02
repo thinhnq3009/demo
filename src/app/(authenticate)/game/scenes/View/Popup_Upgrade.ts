@@ -177,8 +177,8 @@ export default class UpgradePopup extends BasePopup {
       height: 3,
       cellWidth: 150,
       cellHeight: item_h + item_spacing,
-      x: 75,
-      y: -160,
+      x: 0,
+      y: -190,
     });
     this.main_container?.add(grid);
   }
