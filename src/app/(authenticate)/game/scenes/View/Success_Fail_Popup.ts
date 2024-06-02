@@ -1,4 +1,3 @@
-import TweenEffect from '../TweenEffect';
 import BasePopup from './BasePopUp';
 
 export default class SuccessFailPopup extends BasePopup {
@@ -14,7 +13,7 @@ export default class SuccessFailPopup extends BasePopup {
     this.hide_no_animation();
   }
 
-  show_win(is_win:boolean) {
+  show_win(is_win: boolean, callback: () => void) {
     const img_success = this.main_container?.getByName('img_success') as Phaser.GameObjects.Image;
     if (is_win) {
       img_success.setTexture('success');
@@ -24,6 +23,7 @@ export default class SuccessFailPopup extends BasePopup {
     this.show();
     this.scene.time.delayedCall(3000, () => {
       this.hide();
+      callback();
     });
   }
 

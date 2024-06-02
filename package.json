@@ -15,6 +15,7 @@
     "@react-three/fiber": "^8.16.3",
     "@tonconnect/ui-react": "^2.0.2",
     "@types/matter-js": "0.17.6",
+    "@tweenjs/tween.js": "^23.1.2",
     "@types/three": "0.161.2",
     "axios": "^1.6.8",
     "bootstrap": "^5.3.3",

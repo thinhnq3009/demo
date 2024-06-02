@@ -13,8 +13,10 @@ const config: Phaser.Types.Core.GameConfig = {
     autoCenter: Phaser.Scale.CENTER_BOTH,
 
   },
-  scene: [PrayScene,
-    PlayGame],
+  scene: [
+    PlayGame,
+    PrayScene,
+        ],
   transparent: true,
 };
 
